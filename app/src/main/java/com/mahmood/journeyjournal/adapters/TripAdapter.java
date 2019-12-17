@@ -44,11 +44,11 @@ public class TripAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             TextView notes = tripViewHolder.get_notes();
             TextView companion = tripViewHolder.get_companions();
 
-            name.setText(trip.get_name());
-            startDate.setText(trip.get_startDate().toString());
-            endDate.setText(trip.get_endDate().toString());
-            notes.setText(trip.get_notes());
-            companion.setText(trip.get_companions().toString());
+            name.setText(trip.getName());
+            startDate.setText(trip.getStartDate().toString());
+            endDate.setText(trip.getEndDate().toString());
+            notes.setText(trip.getNotes());
+            companion.setText(trip.getCompanions().toString());
         }
     }
 
