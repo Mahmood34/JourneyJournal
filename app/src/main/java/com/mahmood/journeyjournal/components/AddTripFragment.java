@@ -20,8 +20,8 @@ import java.util.Date;
 
 public class AddTripFragment extends BottomSheetDialogFragment implements View.OnClickListener {
     private AddTripClickListener _listener;
-    private EditText _title;
-
+    private EditText _titleEditText;
+    private Button _confirmButton;
     public AddTripFragment(AddTripClickListener listener){
             _listener = listener;
 
@@ -41,31 +41,15 @@ public class AddTripFragment extends BottomSheetDialogFragment implements View.O
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        _title = view.findViewById(R.id.edit_text_title);
-        Button button = view.findViewById(R.id.button_add_trip);
-        button.setOnClickListener(this);
+        _titleEditText = view.findViewById(R.id.add_trip_edit_text_title);
+        _confirmButton = view.findViewById(R.id.add_trip_button);
+        _confirmButton.setOnClickListener(this);
     }
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof ItemClickListener) {
-//            _listener = (ItemClickListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString() + " must implement ItemClickListener.");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        _listener = null;
-//    }
 
     @Override
     public void onClick(View v) {
         Date today = Calendar.getInstance().getTime();
-        _listener.onItemClick(new Trip(_title.getText().toString(), today, today, "" , "This is a note"));
+        _listener.onItemClick(new Trip(_titleEditText.getText().toString(), today, today , "This is a note"));
         dismiss();
     }
 

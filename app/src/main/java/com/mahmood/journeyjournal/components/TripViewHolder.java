@@ -6,24 +6,26 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mahmood.journeyjournal.R;
-import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
+import com.mahmood.journeyjournal.interfaces.TripRecyclerViewClickListener;
+
+import java.text.SimpleDateFormat;
 
 public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    private TextView _name;
-    private TextView _startDate;
-    private TextView _endDate;
-    private TextView _notes;
-    private TextView _companions;
-    private RecyclerViewClickListener _listener;
+    private TextView _titleTextView;
+    private TextView _startDateTextView;
+    private TextView _endDateTextView;
+    private TextView _notesTextView;
+    private TextView _companionsTextView;
+    private TripRecyclerViewClickListener _listener;
 
-    public TripViewHolder(View itemView, RecyclerViewClickListener listener){
+    public TripViewHolder(View itemView, TripRecyclerViewClickListener listener){
         super(itemView);
-        _name = itemView.findViewById(R.id.trip_name);
-        _startDate = itemView.findViewById(R.id.trip_start_date);
-        _endDate = itemView.findViewById(R.id.trip_end_date);
-        _notes = itemView.findViewById(R.id.trip_notes);
-        _companions = itemView.findViewById(R.id.trip_companions);
+        _titleTextView = itemView.findViewById(R.id.trip_name);
+        _startDateTextView = itemView.findViewById(R.id.trip_start_date);
+        _endDateTextView = itemView.findViewById(R.id.trip_end_date);
+        _notesTextView = itemView.findViewById(R.id.trip_notes);
+        _companionsTextView = itemView.findViewById(R.id.trip_companions);
         _listener = listener;
         itemView.setOnClickListener(this);
     }
@@ -33,44 +35,44 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         _listener.onItemClick(v, getAdapterPosition());
     }
 
-    public TextView get_name() {
-        return _name;
+    public TextView getName() {
+        return _titleTextView;
     }
 
-    public void set_name(TextView _name) {
-        this._name = _name;
+    public void setName(TextView name) {
+        _titleTextView = name;
     }
 
-    public TextView get_startDate() {
-        return _startDate;
+    public TextView getStartDate() {
+        return _startDateTextView;
     }
 
-    public void set_startDate(TextView _startDate) {
-        this._startDate = _startDate;
+    public void setStartDate(TextView startDate) {
+        _startDateTextView = startDate;
     }
 
-    public TextView get_endDate() {
-        return _endDate;
+    public TextView getEndDate() {
+        return _endDateTextView;
     }
 
-    public void set_endDate(TextView _endDate) {
-        this._endDate = _endDate;
+    public void setEndDate(TextView endDate) {
+        _endDateTextView = endDate;
     }
 
-    public TextView get_notes() {
-        return _notes;
+    public TextView getNotes() {
+        return _notesTextView;
     }
 
-    public void set_notes(TextView _notes) {
-        this._notes = _notes;
+    public void setNotes(TextView notes) {
+        _notesTextView = notes;
     }
 
-    public TextView get_companions() {
-        return _companions;
+    public TextView getCompanions() {
+        return _companionsTextView;
     }
 
-    public void set_companions(TextView _companions) {
-        this._companions = _companions;
+    public void setCompanions(TextView companions) {
+        _companionsTextView = companions;
     }
 
 }

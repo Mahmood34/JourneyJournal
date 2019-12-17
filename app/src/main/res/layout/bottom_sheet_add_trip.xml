@@ -9,7 +9,7 @@
     app:behavior_hideable="true"
     >
     <TextView
-        android:id="@+id/text_title"
+        android:id="@+id/add_trip_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -20,7 +20,7 @@
         android:text="Title"/>
 
     <EditText
-        android:id="@+id/edit_text_title"
+        android:id="@+id/add_trip_edit_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -30,7 +30,7 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/button_add_trip"
+        android:id="@+id/add_trip_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit"/>

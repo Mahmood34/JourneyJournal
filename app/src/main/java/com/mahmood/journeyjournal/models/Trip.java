@@ -1,63 +1,94 @@
 package com.mahmood.journeyjournal.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
-public class Trip {
+public class Trip implements Parcelable {
 
-    private String _name;
+    private UUID _id;
+    private String _title;
     private Date _startDate;
     private Date _endDate;
     private ArrayList<TripPhoto> _tripPhotos;
     private String _notes;
     private ArrayList<Person> _companions;
 
-    public Trip(String name, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes ,  ArrayList<Person> companions){
-        _name = name;
+    public Trip(String title, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes ,  ArrayList<Person> companions){
+        _id = UUID.randomUUID();
+        _title = title;
         _startDate = startDate;
         _endDate = endDate;
         _tripPhotos = tripPhotos;
         _notes = notes;
         _companions = companions;
-
     }
 
-    public Trip (String name, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes){
-        _name = name;
+    public Trip (String title, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes){
+        _id = UUID.randomUUID();
+        _title = title;
         _startDate = startDate;
         _endDate = endDate;
         _tripPhotos = tripPhotos;
         _notes = notes;
         _companions = new ArrayList<>();
-
     }
 
-    public Trip(String name, Date startDate, Date endDate, String notes, ArrayList<Person> companions){
-        _name = name;
+    public Trip(String title, Date startDate, Date endDate, String notes, ArrayList<Person> companions){
+        _id = UUID.randomUUID();
+        _title = title;
         _startDate = startDate;
         _endDate = endDate;
         _tripPhotos = new ArrayList<>();
         _notes = notes;
         _companions = companions;
-
     }
 
-    public Trip(String name, Date startDate, Date endDate, String notes){
-        _name = name;
+    public Trip(String title, Date startDate, Date endDate, String notes){
+        _id = UUID.randomUUID();
+        _title = title;
         _startDate = startDate;
         _endDate = endDate;
         _tripPhotos = new ArrayList<>();
         _notes = notes;
         _companions = new ArrayList<>();
-
     }
 
-    public String getName() {
-        return _name;
+    protected Trip(Parcel in) {
+        _id = UUID.fromString(in.readString());
+        _title = in.readString();
+        _startDate = (Date) in.readValue(Date.class.getClassLoader());
+        _endDate = (Date) in.readValue(Date.class.getClassLoader());
+        _tripPhotos = in.readArrayList(TripPhoto.class.getClassLoader());
+        _notes = in.readString();
+        _companions = in.readArrayList(Person.class.getClassLoader());
     }
 
-    public void setName(String name) {
-        this._name = name;
+    public static final Creator<Trip> CREATOR = new Creator<Trip>() {
+        @Override
+        public Trip createFromParcel(Parcel in) {
+            return new Trip(in);
+        }
+
+        @Override
+        public Trip[] newArray(int size) {
+            return new Trip[size];
+        }
+    };
+
+    public UUID getId() {
+        return _id;
+    }
+
+    public String getTitle() {
+        return _title;
+    }
+
+    public void setTitle(String title) {
+        this._title = title;
     }
 
     public Date getStartDate() {
@@ -65,7 +96,7 @@ public class Trip {
     }
 
     public void setStartDate(Date startDate) {
-        _startDate = _startDate;
+        _startDate = startDate;
     }
 
     public Date getEndDate() {
@@ -73,7 +104,7 @@ public class Trip {
     }
 
     public void setEndDate(Date endDate) {
-        _endDate = _endDate;
+        _endDate = endDate;
     }
 
     public String getNotes() {
@@ -81,7 +112,7 @@ public class Trip {
     }
 
     public void setNotes(String notes) {
-        _notes = _notes;
+        _notes = notes;
     }
 
     public ArrayList<Person> getCompanions() {
@@ -105,7 +136,7 @@ public class Trip {
     }
 
     public void removeAllCompanions(){
-        _companions = new ArrayList<Person>();
+        _companions = new ArrayList<>();
     }
 
     public ArrayList<TripPhoto> getTripPhotos() {
@@ -130,5 +161,22 @@ public class Trip {
 
     public void removeAllTripPhotos(){
         _tripPhotos = new ArrayList<>();
+    }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_id.toString());
+        dest.writeString(_title);
+        dest.writeValue(_startDate);
+        dest.writeValue(_endDate);
+        dest.writeList(_tripPhotos);
+        dest.writeString(_notes);
+        dest.writeList(_companions);
+
     }
 }

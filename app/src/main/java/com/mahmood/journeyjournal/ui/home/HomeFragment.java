@@ -2,9 +2,12 @@ package com.mahmood.journeyjournal.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,29 +22,29 @@ import com.mahmood.journeyjournal.adapters.TripAdapter;
 import com.mahmood.journeyjournal.components.AddTripFragment;
 import com.mahmood.journeyjournal.activities.TripDetailsActivity;
 import com.mahmood.journeyjournal.interfaces.AddTripClickListener;
-import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
+import com.mahmood.journeyjournal.interfaces.TripRecyclerViewClickListener;
 import com.mahmood.journeyjournal.models.Trip;
 
+import java.io.Console;
 import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment{
 
     private HomeViewModel _homeViewModel;
+    private RecyclerView _recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         _homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
-        AddTripClickListener _addTripListener = (trip -> {
-            _homeViewModel.addTrip(trip);
-        });
-        RecyclerViewClickListener recyclerViewListener = (view , position) -> {
-            Intent intent= new Intent(getActivity(), TripDetailsActivity.class);
-            startActivity(intent);
-        };
+        AddTripClickListener addTripListener = (trip) -> addTripClick(trip);
+
+        TripRecyclerViewClickListener recyclerViewListener = (view , position) -> recyclerViewClick(view, position);
 
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final RecyclerView _recyclerView = root.findViewById(R.id.recycler_view_home);
+        _recyclerView = root.findViewById(R.id.recycler_view_home);
 
         _homeViewModel.getTrips().observe(this, new Observer<ArrayList<Trip>>() {
             @Override
@@ -53,14 +56,38 @@ public class HomeFragment extends Fragment{
 
         FloatingActionButton button = getActivity().findViewById(R.id.floating_action_button);
         button.setOnClickListener(v -> {
-            final AddTripFragment sheetDialog = new AddTripFragment(_addTripListener);
+            final AddTripFragment sheetDialog = new AddTripFragment(addTripListener);
             sheetDialog.show(getFragmentManager(), sheetDialog.getTag());
         });
         _recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-
-
         return root;
     }
 
+    private void addTripClick(Trip trip){
+        _homeViewModel.addTrip(trip);
+    }
+
+    private void recyclerViewClick(View view, int position){
+        Intent intent= new Intent(getActivity(), TripDetailsActivity.class);
+        intent.putExtra("trip", _homeViewModel.getTrip(position));
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        try {
+            super.onActivityResult(requestCode, resultCode, data);
+            if(requestCode == 1 && resultCode == RESULT_OK){
+                Trip updatedTrip = data.getExtras().getParcelable("updatedTrip");
+                Trip trip = _homeViewModel.getTrip(updatedTrip.getId());
+                trip.setTitle(updatedTrip.getTitle());
+                trip.setNotes(updatedTrip.getNotes());
+                _recyclerView.getAdapter().notifyDataSetChanged();
+
+            }
+        } catch (Exception exception){
+            Toast.makeText(this.getActivity(), exception.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
 }

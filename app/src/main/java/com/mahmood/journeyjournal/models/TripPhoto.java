@@ -1,15 +1,43 @@
 package com.mahmood.journeyjournal.models;
 
-public class TripPhoto {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private String _link;
+public class TripPhoto implements Parcelable {
 
-    public TripPhoto(String link){
-        _link = link;
+    private String _image;
+
+    public TripPhoto(String image){
+        _image = image;
     }
 
-    public String getLink() {
-        return _link;
+    protected TripPhoto(Parcel in) {
+        _image = in.readString();
     }
 
+    public static final Creator<TripPhoto> CREATOR = new Creator<TripPhoto>() {
+        @Override
+        public TripPhoto createFromParcel(Parcel in) {
+            return new TripPhoto(in);
+        }
+
+        @Override
+        public TripPhoto[] newArray(int size) {
+            return new TripPhoto[size];
+        }
+    };
+
+    public String getImage() {
+        return _image;
+    }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_image);
+    }
 }

@@ -10,15 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.components.TripViewHolder;
-import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
+import com.mahmood.journeyjournal.interfaces.TripRecyclerViewClickListener;
 import com.mahmood.journeyjournal.models.Trip;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class TripAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    private DateFormat _formatter = SimpleDateFormat.getDateInstance();
     private ArrayList<Trip> _trips;
-    private RecyclerViewClickListener _listener;
-    public TripAdapter(ArrayList<Trip> trips, RecyclerViewClickListener listener) {
+    private TripRecyclerViewClickListener _listener;
+
+    public TripAdapter(ArrayList<Trip> trips, TripRecyclerViewClickListener listener) {
         _trips = trips;
         _listener = listener;
     }
@@ -38,17 +42,17 @@ public class TripAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if(holder instanceof TripViewHolder){
             TripViewHolder tripViewHolder = (TripViewHolder) holder;
-            TextView name = tripViewHolder.get_name();
-            TextView startDate = tripViewHolder.get_startDate();
-            TextView endDate = tripViewHolder.get_endDate();
-            TextView notes = tripViewHolder.get_notes();
-            TextView companion = tripViewHolder.get_companions();
+            TextView titleTextView = tripViewHolder.getName();
+            TextView startDateTextView = tripViewHolder.getStartDate();
+            TextView endDateTextView = tripViewHolder.getEndDate();
+            TextView notesTextView = tripViewHolder.getNotes();
+            TextView companionTextView = tripViewHolder.getCompanions();
 
-            name.setText(trip.getName());
-            startDate.setText(trip.getStartDate().toString());
-            endDate.setText(trip.getEndDate().toString());
-            notes.setText(trip.getNotes());
-            companion.setText(trip.getCompanions().toString());
+            titleTextView.setText(trip.getTitle());
+            startDateTextView.setText(_formatter.format(trip.getStartDate()));
+            endDateTextView.setText(_formatter.format(trip.getEndDate()));
+            notesTextView.setText(trip.getNotes());
+            companionTextView.setText(trip.getCompanions().toString());
         }
     }
 
