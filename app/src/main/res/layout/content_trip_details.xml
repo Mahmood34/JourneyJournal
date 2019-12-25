@@ -54,6 +54,7 @@
 
     <Button
         android:id="@+id/trip_details_button_start_date"
+        android:enabled="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"/>
@@ -68,6 +69,7 @@
 
     <Button
         android:id="@+id/trip_details_button_end_date"
+        android:enabled="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"/>

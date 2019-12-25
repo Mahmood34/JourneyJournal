@@ -2,8 +2,6 @@ package com.mahmood.journeyjournal.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.adapters.TripAdapter;
-import com.mahmood.journeyjournal.components.AddTripFragment;
+import com.mahmood.journeyjournal.components.AddTripBottomSheetFragment;
 import com.mahmood.journeyjournal.activities.TripDetailsActivity;
 import com.mahmood.journeyjournal.interfaces.AddTripClickListener;
 import com.mahmood.journeyjournal.interfaces.TripRecyclerViewClickListener;
 import com.mahmood.journeyjournal.models.Trip;
 
-import java.io.Console;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
@@ -56,7 +53,7 @@ public class HomeFragment extends Fragment{
 
         FloatingActionButton button = getActivity().findViewById(R.id.floating_action_button);
         button.setOnClickListener(v -> {
-            final AddTripFragment sheetDialog = new AddTripFragment(addTripListener);
+            final AddTripBottomSheetFragment sheetDialog = new AddTripBottomSheetFragment(addTripListener);
             sheetDialog.show(getFragmentManager(), sheetDialog.getTag());
         });
         _recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -83,6 +80,8 @@ public class HomeFragment extends Fragment{
                 Trip trip = _homeViewModel.getTrip(updatedTrip.getId());
                 trip.setTitle(updatedTrip.getTitle());
                 trip.setNotes(updatedTrip.getNotes());
+                trip.setStartDate(updatedTrip.getStartDate());
+                trip.setEndDate(updatedTrip.getEndDate());
                 _recyclerView.getAdapter().notifyDataSetChanged();
 
             }

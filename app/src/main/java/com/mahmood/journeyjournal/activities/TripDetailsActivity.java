@@ -14,13 +14,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.mahmood.journeyjournal.MainActivity;
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.models.Trip;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class TripDetailsActivity extends AppCompatActivity {
     private int _resultCode = RESULT_CANCELED;
@@ -63,11 +68,23 @@ public class TripDetailsActivity extends AppCompatActivity {
                         _resultCode = RESULT_OK;
                         _trip.setTitle(_titleEditText.getText().toString());
                         _trip.setNotes(_notesEditText.getText().toString());
+                        try {
+                            Date startDate = _formatter.parse(_startDateButton.getText().toString());
+                            Date endDate = _formatter.parse(_endDateButton.getText().toString());
+                            _trip.setStartDate(startDate);
+                            _trip.setEndDate(endDate);
+
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 }
                 _titleEditText.setEnabled(isEditing);
                 _notesEditText.setEnabled(isEditing);
+                _startDateButton.setEnabled(isEditing);
+                _endDateButton.setEnabled(isEditing);
 
             }
         });
@@ -76,7 +93,47 @@ public class TripDetailsActivity extends AppCompatActivity {
         _notesEditText.setText(_trip.getNotes());
         _startDateButton.setText(_formatter.format(_trip.getStartDate()));
         _endDateButton.setText(_formatter.format(_trip.getEndDate()));
+        _startDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext());
+                try {
+                    datePickerDialog.getDatePicker().setMaxDate(_formatter.parse(_endDateButton.getText().toString()).getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(year, month, dayOfMonth);
+                        _startDateButton.setText(_formatter.format(calendar.getTime()));
+                    }
+                });
+                datePickerDialog.show();
+            }
+        });
 
+        _endDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext());
+                try {
+                    datePickerDialog.getDatePicker().setMinDate(_formatter.parse(_startDateButton.getText().toString()).getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(year, month, dayOfMonth);
+                        _endDateButton.setText(_formatter.format(calendar.getTime()));
+                    }
+                });
+                datePickerDialog.show();
+            }
+        });
     }
 
     @Override
@@ -97,4 +154,5 @@ public class TripDetailsActivity extends AppCompatActivity {
         intent.putExtra("updatedTrip", _trip);
         setResult(_resultCode, intent);
     }
+
 }
