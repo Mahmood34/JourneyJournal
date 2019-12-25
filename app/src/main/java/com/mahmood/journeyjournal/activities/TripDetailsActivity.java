@@ -3,12 +3,15 @@ package com.mahmood.journeyjournal.activities;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -59,12 +62,12 @@ public class TripDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 isEditing = !isEditing;
-                Snackbar.make(view, isEditing?"Now editing":"Confirmed", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, isEditing ? "Now editing" : "Confirmed", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                if(isEditing){
+                if (isEditing) {
 
-                }else{
-                    if(_trip.getNotes() != _notesEditText.getText().toString() || _trip.getTitle() != _titleEditText.getText().toString() ){
+                } else {
+                    if (_trip.getNotes() != _notesEditText.getText().toString() || _trip.getTitle() != _titleEditText.getText().toString()) {
                         _resultCode = RESULT_OK;
                         _trip.setTitle(_titleEditText.getText().toString());
                         _trip.setNotes(_notesEditText.getText().toString());
@@ -149,7 +152,7 @@ public class TripDetailsActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void createIntent(){
+    private void createIntent() {
         Intent intent = getIntent();
         intent.putExtra("updatedTrip", _trip);
         setResult(_resultCode, intent);

@@ -10,7 +10,7 @@ import com.mahmood.journeyjournal.interfaces.TripRecyclerViewClickListener;
 
 import java.text.SimpleDateFormat;
 
-public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private TextView _titleTextView;
     private TextView _startDateTextView;
@@ -19,7 +19,7 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView _companionsTextView;
     private TripRecyclerViewClickListener _listener;
 
-    public TripViewHolder(View itemView, TripRecyclerViewClickListener listener){
+    public TripViewHolder(View itemView, TripRecyclerViewClickListener listener) {
         super(itemView);
         _titleTextView = itemView.findViewById(R.id.trip_name);
         _startDateTextView = itemView.findViewById(R.id.trip_start_date);

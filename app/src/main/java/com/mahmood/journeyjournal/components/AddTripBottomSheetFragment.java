@@ -32,8 +32,9 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
     private Button _startDateButton;
     private Button _endDateButton;
     private Button _confirmButton;
-    public AddTripBottomSheetFragment(AddTripClickListener listener){
-            _listener = listener;
+
+    public AddTripBottomSheetFragment(AddTripClickListener listener) {
+        _listener = listener;
 
     }
 
@@ -107,7 +108,7 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
         try {
             Date startDate = _formatter.parse(_startDateButton.getText().toString());
             Date endDate = _formatter.parse(_endDateButton.getText().toString());
-            _listener.onClick(new Trip(_titleEditText.getText().toString(), startDate , endDate , _notesEditText.getText().toString()));
+            _listener.onClick(new Trip(_titleEditText.getText().toString(), startDate, endDate, _notesEditText.getText().toString()));
             dismiss();
 
         } catch (ParseException e) {

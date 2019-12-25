@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.components.TripViewHolder;
 import com.mahmood.journeyjournal.interfaces.TripRecyclerViewClickListener;
@@ -40,7 +41,7 @@ public class TripAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Trip trip = _trips.get(position);
 
-        if(holder instanceof TripViewHolder){
+        if (holder instanceof TripViewHolder) {
             TripViewHolder tripViewHolder = (TripViewHolder) holder;
             TextView titleTextView = tripViewHolder.getName();
             TextView startDateTextView = tripViewHolder.getStartDate();

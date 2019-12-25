@@ -9,7 +9,7 @@ public class Person implements Parcelable {
     private UUID _id;
     private String _name;
 
-    public Person(String name){
+    public Person(String name) {
         _id = UUID.randomUUID();
         _name = name;
 

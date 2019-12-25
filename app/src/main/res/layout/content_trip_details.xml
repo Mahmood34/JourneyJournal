@@ -8,69 +8,92 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.TripDetailsActivity"
     tools:showIn="@layout/activity_trip_details">
+
     <TextView
         android:id="@+id/trip_details_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:text="Title"
         android:textAlignment="textStart"
-        android:textSize="15sp"
-        android:text="Title"/>
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/trip_details_edit_text_title"
-        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:enabled="false"
         android:textAlignment="center"
         android:textSize="20sp" />
+
     <TextView
         android:id="@+id/trip_details_text_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:text="Notes"
         android:textAlignment="textStart"
-        android:textSize="15sp"
-        android:text="Notes"/>
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/trip_details_edit_text_notes"
-        android:enabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:enabled="false"
         android:textAlignment="center"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/trip_details_text_start_date"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textAlignment="textStart"
-        android:textSize="15sp"
-        android:text="Start Date"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/trip_details_button_start_date"
-        android:enabled="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
-    <TextView
-        android:id="@+id/trip_details_text_end_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textAlignment="textStart"
-        android:textSize="15sp"
-        android:text="Start Date"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/trip_details_button_end_date"
-        android:enabled="false"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"/>
+            <TextView
+                android:id="@+id/trip_details_text_start_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="8dp"
+                android:text="Start Date"
+                android:textAlignment="textStart"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/trip_details_button_start_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:enabled="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/trip_details_text_end_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="End Date"
+                android:textAlignment="textStart"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/trip_details_button_end_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:enabled="false" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

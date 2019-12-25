@@ -17,7 +17,7 @@ public class Trip implements Parcelable {
     private String _notes;
     private ArrayList<Person> _companions;
 
-    public Trip(String title, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes ,  ArrayList<Person> companions){
+    public Trip(String title, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes, ArrayList<Person> companions) {
         _id = UUID.randomUUID();
         _title = title;
         _startDate = startDate;
@@ -27,7 +27,7 @@ public class Trip implements Parcelable {
         _companions = companions;
     }
 
-    public Trip (String title, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes){
+    public Trip(String title, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes) {
         _id = UUID.randomUUID();
         _title = title;
         _startDate = startDate;
@@ -37,7 +37,7 @@ public class Trip implements Parcelable {
         _companions = new ArrayList<>();
     }
 
-    public Trip(String title, Date startDate, Date endDate, String notes, ArrayList<Person> companions){
+    public Trip(String title, Date startDate, Date endDate, String notes, ArrayList<Person> companions) {
         _id = UUID.randomUUID();
         _title = title;
         _startDate = startDate;
@@ -47,7 +47,7 @@ public class Trip implements Parcelable {
         _companions = companions;
     }
 
-    public Trip(String title, Date startDate, Date endDate, String notes){
+    public Trip(String title, Date startDate, Date endDate, String notes) {
         _id = UUID.randomUUID();
         _title = title;
         _startDate = startDate;
@@ -119,23 +119,23 @@ public class Trip implements Parcelable {
         return _companions;
     }
 
-    public void addCompainion(Person person){
+    public void addCompainion(Person person) {
         _companions.add(person);
     }
 
-    public void addCompanions(ArrayList<Person> people){
+    public void addCompanions(ArrayList<Person> people) {
         _companions.addAll(people);
     }
 
-    public void removeCompainion(Person person){
+    public void removeCompainion(Person person) {
         _companions.remove(person);
     }
 
-    public void removeCompanions(ArrayList<Person> people){
+    public void removeCompanions(ArrayList<Person> people) {
         _companions.removeAll(people);
     }
 
-    public void removeAllCompanions(){
+    public void removeAllCompanions() {
         _companions = new ArrayList<>();
     }
 
@@ -143,23 +143,23 @@ public class Trip implements Parcelable {
         return _tripPhotos;
     }
 
-    public void addTripPhoto(TripPhoto tripPhoto){
+    public void addTripPhoto(TripPhoto tripPhoto) {
         _tripPhotos.add(tripPhoto);
     }
 
-    public void addTripPhotos(ArrayList<TripPhoto> tripPhotos){
+    public void addTripPhotos(ArrayList<TripPhoto> tripPhotos) {
         _tripPhotos.addAll(tripPhotos);
     }
 
-    public void removeTripPhoto(TripPhoto tripPhoto){
+    public void removeTripPhoto(TripPhoto tripPhoto) {
         _tripPhotos.remove(tripPhoto);
     }
 
-    public void removeTripPhotos(ArrayList<TripPhoto> tripPhotos){
+    public void removeTripPhotos(ArrayList<TripPhoto> tripPhotos) {
         _tripPhotos.removeAll(tripPhotos);
     }
 
-    public void removeAllTripPhotos(){
+    public void removeAllTripPhotos() {
         _tripPhotos = new ArrayList<>();
     }
 

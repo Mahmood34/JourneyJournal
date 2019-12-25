@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
     private HomeViewModel _homeViewModel;
     private RecyclerView _recyclerView;
@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment{
 
         AddTripClickListener addTripListener = (trip) -> addTripClick(trip);
 
-        TripRecyclerViewClickListener recyclerViewListener = (view , position) -> recyclerViewClick(view, position);
+        TripRecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
 
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         _recyclerView = root.findViewById(R.id.recycler_view_home);
@@ -61,12 +61,12 @@ public class HomeFragment extends Fragment{
         return root;
     }
 
-    private void addTripClick(Trip trip){
+    private void addTripClick(Trip trip) {
         _homeViewModel.addTrip(trip);
     }
 
-    private void recyclerViewClick(View view, int position){
-        Intent intent= new Intent(getActivity(), TripDetailsActivity.class);
+    private void recyclerViewClick(View view, int position) {
+        Intent intent = new Intent(getActivity(), TripDetailsActivity.class);
         intent.putExtra("trip", _homeViewModel.getTrip(position));
         startActivityForResult(intent, 1);
     }
@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         try {
             super.onActivityResult(requestCode, resultCode, data);
-            if(requestCode == 1 && resultCode == RESULT_OK){
+            if (requestCode == 1 && resultCode == RESULT_OK) {
                 Trip updatedTrip = data.getExtras().getParcelable("updatedTrip");
                 Trip trip = _homeViewModel.getTrip(updatedTrip.getId());
                 trip.setTitle(updatedTrip.getTitle());
@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment{
                 _recyclerView.getAdapter().notifyDataSetChanged();
 
             }
-        } catch (Exception exception){
+        } catch (Exception exception) {
             Toast.makeText(this.getActivity(), exception.toString(), Toast.LENGTH_SHORT).show();
         }
     }

@@ -7,7 +7,7 @@ public class TripPhoto implements Parcelable {
 
     private String _image;
 
-    public TripPhoto(String image){
+    public TripPhoto(String image) {
         _image = image;
     }
 
