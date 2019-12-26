@@ -3,48 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/add_trip_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:padding="16dp"
     app:behavior_hideable="true"
+
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <TextView
-        android:id="@+id/add_trip_text_title"
+        android:id="@+id/add_trip_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Title"
-        android:textAlignment="textStart"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/add_trip_edit_text_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:text="New Trip"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textSize="28dp" />
 
-    <TextView
-        android:id="@+id/add_trip_text_notes"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Notes"
-        android:textAlignment="textStart"
-        android:textSize="15sp" />
+        android:layout_marginTop="18dp"
+        android:hint="Title">
 
-    <EditText
-        android:id="@+id/add_trip_edit_text_notes"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_trip_edit_text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+        android:layout_marginTop="18dp"
+        android:hint="Notes">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_trip_edit_text_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,7 +69,7 @@
                 android:id="@+id/add_trip_button_start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:textAllCaps="false"/>
         </LinearLayout>
 
         <LinearLayout
@@ -91,15 +91,18 @@
                 android:id="@+id/add_trip_button_end_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:textAllCaps="false"/>
 
         </LinearLayout>
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/add_trip_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit" />
+        android:layout_marginTop="18dp"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:theme="@style/Theme.MaterialComponents.Light" />
 
 </LinearLayout>

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.components.TripViewHolder;
-import com.mahmood.journeyjournal.interfaces.TripRecyclerViewClickListener;
+import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
 import com.mahmood.journeyjournal.models.Trip;
 
 import java.text.DateFormat;
@@ -21,9 +21,9 @@ import java.util.ArrayList;
 public class TripAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private DateFormat _formatter = SimpleDateFormat.getDateInstance();
     private ArrayList<Trip> _trips;
-    private TripRecyclerViewClickListener _listener;
+    private RecyclerViewClickListener _listener;
 
-    public TripAdapter(ArrayList<Trip> trips, TripRecyclerViewClickListener listener) {
+    public TripAdapter(ArrayList<Trip> trips, RecyclerViewClickListener listener) {
         _trips = trips;
         _listener = listener;
     }

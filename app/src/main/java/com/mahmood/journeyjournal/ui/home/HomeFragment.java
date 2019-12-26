@@ -20,7 +20,7 @@ import com.mahmood.journeyjournal.adapters.TripAdapter;
 import com.mahmood.journeyjournal.components.AddTripBottomSheetFragment;
 import com.mahmood.journeyjournal.activities.TripDetailsActivity;
 import com.mahmood.journeyjournal.interfaces.AddTripClickListener;
-import com.mahmood.journeyjournal.interfaces.TripRecyclerViewClickListener;
+import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
 import com.mahmood.journeyjournal.models.Trip;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
 
         AddTripClickListener addTripListener = (trip) -> addTripClick(trip);
 
-        TripRecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
+        RecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
 
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         _recyclerView = root.findViewById(R.id.recycler_view_home);

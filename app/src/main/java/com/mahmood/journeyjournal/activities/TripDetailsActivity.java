@@ -1,7 +1,10 @@
 package com.mahmood.journeyjournal.activities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Region;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,21 +14,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.mahmood.journeyjournal.MainActivity;
 import com.mahmood.journeyjournal.R;
+import com.mahmood.journeyjournal.models.Person;
 import com.mahmood.journeyjournal.models.Trip;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -39,6 +46,8 @@ public class TripDetailsActivity extends AppCompatActivity {
     private EditText _notesEditText;
     private Button _startDateButton;
     private Button _endDateButton;
+    private Button _companionsButton;
+    private ImageButton _addCompanionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +65,17 @@ public class TripDetailsActivity extends AppCompatActivity {
         _notesEditText = findViewById(R.id.trip_details_edit_text_notes);
         _startDateButton = findViewById(R.id.trip_details_button_start_date);
         _endDateButton = findViewById(R.id.trip_details_button_end_date);
-
+        _companionsButton = findViewById(R.id.trip_details_button_companions);
+        _addCompanionButton = findViewById(R.id.trip_details_add_companion);
         FloatingActionButton fab = findViewById(R.id.fab);
+        _titleEditText.setText(_trip.getTitle());
+        _notesEditText.setText(_trip.getNotes());
+        _startDateButton.setText(_formatter.format(_trip.getStartDate()));
+        _endDateButton.setText(_formatter.format(_trip.getEndDate()));
+        _companionsButton.setText("Companions: " + String.valueOf(_trip.getCompanions().size()));
+
+        //region onClickListener
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +95,6 @@ public class TripDetailsActivity extends AppCompatActivity {
                             _trip.setStartDate(startDate);
                             _trip.setEndDate(endDate);
 
-
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -92,10 +109,7 @@ public class TripDetailsActivity extends AppCompatActivity {
             }
         });
 
-        _titleEditText.setText(_trip.getTitle());
-        _notesEditText.setText(_trip.getNotes());
-        _startDateButton.setText(_formatter.format(_trip.getStartDate()));
-        _endDateButton.setText(_formatter.format(_trip.getEndDate()));
+
         _startDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +151,21 @@ public class TripDetailsActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+        _companionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setTitle("Companions");
+                final ArrayList<Person> x = _trip.getCompanions();
+//                builder.setItems(x, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Toast.makeText(getApplicationContext(), "Companion clicked", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+            }
+        });
+        //endregion
     }
 
     @Override

@@ -2,6 +2,6 @@ package com.mahmood.journeyjournal.interfaces;
 
 import android.view.View;
 
-public interface TripRecyclerViewClickListener {
+public interface RecyclerViewClickListener {
     void onItemClick (View view, int position);
 }

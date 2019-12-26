@@ -6,9 +6,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mahmood.journeyjournal.R;
-import com.mahmood.journeyjournal.interfaces.TripRecyclerViewClickListener;
-
-import java.text.SimpleDateFormat;
+import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
 
 public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -17,9 +15,9 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView _endDateTextView;
     private TextView _notesTextView;
     private TextView _companionsTextView;
-    private TripRecyclerViewClickListener _listener;
+    private RecyclerViewClickListener _listener;
 
-    public TripViewHolder(View itemView, TripRecyclerViewClickListener listener) {
+    public TripViewHolder(View itemView, RecyclerViewClickListener listener) {
         super(itemView);
         _titleTextView = itemView.findViewById(R.id.trip_name);
         _startDateTextView = itemView.findViewById(R.id.trip_start_date);

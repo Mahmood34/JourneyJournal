@@ -3,39 +3,60 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="9dp"
-    android:orientation="vertical"
-    android:padding="9dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/trip_name"
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name" />
+        android:minHeight="150dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        app:strokeWidth="1dp"
+        app:strokeColor="@android:color/darker_gray"
+        app:cardCornerRadius="14dp">
 
-    <TextView
-        android:id="@+id/trip_start_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start Date" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom|left"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/trip_end_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="End Date" />
+            <TextView
+                android:id="@+id/trip_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="50dp"
+                android:text="Name" />
 
-    <TextView
-        android:id="@+id/trip_notes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notes" />
+            <TextView
+                android:id="@+id/trip_start_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Date" />
 
-    <TextView
-        android:id="@+id/trip_companions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Companions" />
+            <TextView
+                android:id="@+id/trip_end_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End Date" />
+
+            <TextView
+                android:id="@+id/trip_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notes" />
+
+            <TextView
+                android:id="@+id/trip_companions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Companions" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </LinearLayout>
