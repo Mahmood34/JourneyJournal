@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "232404441540",
+    "firebase_url": "https://journey-journal.firebaseio.com",
+    "project_id": "journey-journal",
+    "storage_bucket": "journey-journal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232404441540:android:f415d262145b4f0001ac91",
+        "android_client_info": {
+          "package_name": "com.mahmood.journeyjournal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232404441540-u4c6dimi999rp8ulklt8e6d7nd6g5ph6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mahmood.journeyjournal",
+            "certificate_hash": "426837b438317b1dc4f26101c62f8124ae115506"
+          }
+        },
+        {
+          "client_id": "232404441540-b4rqopdns7atm0esre1piol50dnilq3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrFgwzuPC9t5Jp_6qNNodoCu_AnQ_lIZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232404441540-b4rqopdns7atm0esre1piol50dnilq3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
