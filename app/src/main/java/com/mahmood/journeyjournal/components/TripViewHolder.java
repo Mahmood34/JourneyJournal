@@ -3,6 +3,7 @@ package com.mahmood.journeyjournal.components;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mahmood.journeyjournal.R;
@@ -17,7 +18,7 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView _companionsTextView;
     private RecyclerViewClickListener _listener;
 
-    public TripViewHolder(View itemView, RecyclerViewClickListener listener) {
+    public TripViewHolder(@NonNull View itemView, RecyclerViewClickListener listener) {
         super(itemView);
         _titleTextView = itemView.findViewById(R.id.trip_name);
         _startDateTextView = itemView.findViewById(R.id.trip_start_date);

@@ -9,6 +9,17 @@ import java.util.UUID;
 
 public class Trip implements Parcelable {
 
+    public static final Creator<Trip> CREATOR = new Creator<Trip>() {
+        @Override
+        public Trip createFromParcel(Parcel in) {
+            return new Trip(in);
+        }
+
+        @Override
+        public Trip[] newArray(int size) {
+            return new Trip[size];
+        }
+    };
     private UUID _id;
     private String _title;
     private Date _startDate;
@@ -67,18 +78,6 @@ public class Trip implements Parcelable {
         _companions = in.readArrayList(Person.class.getClassLoader());
     }
 
-    public static final Creator<Trip> CREATOR = new Creator<Trip>() {
-        @Override
-        public Trip createFromParcel(Parcel in) {
-            return new Trip(in);
-        }
-
-        @Override
-        public Trip[] newArray(int size) {
-            return new Trip[size];
-        }
-    };
-
     public UUID getId() {
         return _id;
     }
@@ -115,8 +114,16 @@ public class Trip implements Parcelable {
         _notes = notes;
     }
 
+    public Person getCompanion(int position) {
+        return _companions.get(position);
+    }
+
     public ArrayList<Person> getCompanions() {
         return _companions;
+    }
+
+    public void setCompanions(ArrayList<Person> people) {
+        _companions = people;
     }
 
     public void addCompainion(Person person) {
@@ -139,8 +146,16 @@ public class Trip implements Parcelable {
         _companions = new ArrayList<>();
     }
 
+    public TripPhoto getTripPhoto(int position) {
+        return _tripPhotos.get(position);
+    }
+
     public ArrayList<TripPhoto> getTripPhotos() {
         return _tripPhotos;
+    }
+
+    public void setTripPhotos(ArrayList<TripPhoto> photos) {
+        _tripPhotos = photos;
     }
 
     public void addTripPhoto(TripPhoto tripPhoto) {

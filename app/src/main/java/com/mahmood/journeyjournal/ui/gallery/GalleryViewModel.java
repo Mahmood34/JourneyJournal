@@ -1,4 +1,4 @@
-package com.mahmood.journeyjournal.ui.home;
+package com.mahmood.journeyjournal.ui.gallery;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -6,13 +6,15 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.mahmood.journeyjournal.models.Trip;
+import com.mahmood.journeyjournal.models.TripPhoto;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-public class HomeViewModel extends ViewModel {
+public class GalleryViewModel extends ViewModel {
+
 
     private MutableLiveData<ArrayList<Trip>> _trips;
 
@@ -71,6 +73,20 @@ public class HomeViewModel extends ViewModel {
         _trips.setValue(trips);
     }
 
+    public LiveData<ArrayList<TripPhoto>> getAllTripPhotos() {
+        if (_trips == null) {
+            _trips = new MutableLiveData<>();
+            loadTrips();
+        }
+
+        ArrayList<TripPhoto> tripPhotos = new ArrayList<>();
+        for (Trip trip :
+                _trips.getValue()) {
+            tripPhotos.addAll(trip.getTripPhotos());
+        }
+        return new MutableLiveData<>(tripPhotos);
+    }
+
     /**
      * Loads list of trips.
      */
@@ -79,10 +95,10 @@ public class HomeViewModel extends ViewModel {
         ArrayList<Trip> trips = new ArrayList<>();
         Date today = Calendar.getInstance().getTime();
 
-//        trips.add(new Trip("Barcelona", today, today, "A Week in Barcelona"));
-//        trips.add(new Trip("London", today, today, "With family"));
-//        trips.add(new Trip("Madrid", today, today, "Adventure"));
-//        trips.add(new Trip("Paris", today, today, "Date night with the wife"));
+        trips.add(new Trip("Barcelona", today, today, "A Week in Barcelona"));
+        trips.add(new Trip("London", today, today, "With family"));
+        trips.add(new Trip("Madrid", today, today, "Adventure"));
+        trips.add(new Trip("Paris", today, today, "Date night with the wife"));
 
 
         _trips = new MutableLiveData<>(trips);

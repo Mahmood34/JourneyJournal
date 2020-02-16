@@ -53,7 +53,7 @@ public class TripAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             startDateTextView.setText(_formatter.format(trip.getStartDate()));
             endDateTextView.setText(_formatter.format(trip.getEndDate()));
             notesTextView.setText(trip.getNotes());
-            companionTextView.setText(trip.getCompanions().toString());
+            companionTextView.setText("Companions : " + trip.getCompanions().size());
         }
     }
 

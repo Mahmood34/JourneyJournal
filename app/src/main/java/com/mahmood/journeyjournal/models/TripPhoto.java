@@ -5,13 +5,17 @@ import android.os.Parcelable;
 
 public class TripPhoto implements Parcelable {
 
+    private String _name;
     private String _image;
 
-    public TripPhoto(String image) {
+    public TripPhoto(String name, String image) {
+        _name = name;
         _image = image;
+
     }
 
-    protected TripPhoto(Parcel in) {
+    private TripPhoto(Parcel in) {
+        _name = in.readString();
         _image = in.readString();
     }
 
@@ -27,6 +31,10 @@ public class TripPhoto implements Parcelable {
         }
     };
 
+    public String getName() {
+        return _name;
+    }
+
     public String getImage() {
         return _image;
     }
@@ -38,6 +46,7 @@ public class TripPhoto implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_name);
         dest.writeString(_image);
     }
 }

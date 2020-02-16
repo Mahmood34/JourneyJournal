@@ -5,25 +5,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mahmood.journeyjournal.R;
+import com.mahmood.journeyjournal.activities.TripDetailsActivity;
 import com.mahmood.journeyjournal.adapters.TripAdapter;
 import com.mahmood.journeyjournal.components.AddTripBottomSheetFragment;
-import com.mahmood.journeyjournal.activities.TripDetailsActivity;
 import com.mahmood.journeyjournal.interfaces.AddTripClickListener;
 import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
 import com.mahmood.journeyjournal.models.Trip;
-
-import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -31,6 +29,9 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel _homeViewModel;
     private RecyclerView _recyclerView;
+
+    TextView tripName, startDate, endDate, notes, companions;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,12 +44,9 @@ public class HomeFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         _recyclerView = root.findViewById(R.id.recycler_view_home);
 
-        _homeViewModel.getTrips().observe(this, new Observer<ArrayList<Trip>>() {
-            @Override
-            public void onChanged(ArrayList<Trip> trips) {
-                TripAdapter tripAdapter = new TripAdapter(trips, recyclerViewListener);
-                _recyclerView.setAdapter(tripAdapter);
-            }
+        _homeViewModel.getTrips().observe(this, trips -> {
+            TripAdapter tripAdapter = new TripAdapter(trips, recyclerViewListener);
+            _recyclerView.setAdapter(tripAdapter);
         });
 
         FloatingActionButton button = getActivity().findViewById(R.id.floating_action_button);
@@ -82,6 +80,8 @@ public class HomeFragment extends Fragment {
                 trip.setNotes(updatedTrip.getNotes());
                 trip.setStartDate(updatedTrip.getStartDate());
                 trip.setEndDate(updatedTrip.getEndDate());
+                trip.setCompanions(updatedTrip.getCompanions());
+                trip.setTripPhotos(updatedTrip.getTripPhotos());
                 _recyclerView.getAdapter().notifyDataSetChanged();
 
             }
