@@ -5,25 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_weight="1"
     android:padding="16dp"
     app:behavior_hideable="true"
-
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <TextView
         android:id="@+id/add_trip_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Trip"
+        android:text="@string/new_trip"
         android:textAlignment="center"
-        android:textSize="28dp" />
+        android:textSize="28sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:hint="Title">
+        android:hint="@string/title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/add_trip_edit_text_title"
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:hint="Notes">
+        android:hint="@string/notes">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/add_trip_edit_text_notes"
@@ -48,7 +48,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Start Date"
+                android:text="@string/start_date"
                 android:textAlignment="textStart"
                 android:textSize="15sp" />
 
@@ -83,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="End Date"
+                android:text="@string/end_date"
                 android:textAlignment="textStart"
                 android:textSize="15sp" />
 
@@ -101,7 +102,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textAllCaps="false"
         android:theme="@style/Theme.MaterialComponents.Light" />
 

@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mahmood.journeyjournal.R;
@@ -32,7 +31,7 @@ public class GalleryFragment extends Fragment {
                 ViewModelProviders.of(this).get(GalleryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         RecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
-        _recyclerView = root.findViewById(R.id.recycler_view_gallery);
+        //_recyclerView = root.findViewById(R.id.recycler_view_gallery);
         _galleryViewModel.getAllTripPhotos().observe(this, new Observer<ArrayList<TripPhoto>>() {
             @Override
             public void onChanged(ArrayList<TripPhoto> trips) {
@@ -40,7 +39,7 @@ public class GalleryFragment extends Fragment {
                 _recyclerView.setAdapter(tripAdapter);
             }
         });
-        _recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
+//        _recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
 
         return root;
     }

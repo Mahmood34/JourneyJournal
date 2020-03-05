@@ -6,6 +6,17 @@ import android.os.Parcelable;
 import java.util.UUID;
 
 public class Person implements Parcelable {
+    public static final Creator<Person> CREATOR = new Creator<Person>() {
+        @Override
+        public Person createFromParcel(Parcel in) {
+            return new Person(in);
+        }
+
+        @Override
+        public Person[] newArray(int size) {
+            return new Person[size];
+        }
+    };
     private UUID _id;
     private String _name;
 
@@ -19,18 +30,6 @@ public class Person implements Parcelable {
         _id = UUID.fromString(in.readString());
         _name = in.readString();
     }
-
-    public static final Creator<Person> CREATOR = new Creator<Person>() {
-        @Override
-        public Person createFromParcel(Parcel in) {
-            return new Person(in);
-        }
-
-        @Override
-        public Person[] newArray(int size) {
-            return new Person[size];
-        }
-    };
 
     public UUID getId() {
         return _id;

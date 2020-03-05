@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:padding="5dp">
 
-    <ImageView
-        android:id="@+id/trip_details_recycler_view_gallery"
+    <TextView
+        android:id="@+id/info_text"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:scaleType="centerCrop" />
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        android:gravity="center" />
 
 </LinearLayout>
