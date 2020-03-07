@@ -101,8 +101,8 @@ public class TripDetailsActivity extends AppCompatActivity {
                         try {
                             Date startDate = _formatter.parse(_startDateButton.getText().toString());
                             Date endDate = _formatter.parse(_endDateButton.getText().toString());
-                            _trip.setStartDate(startDate);
-                            _trip.setEndDate(endDate);
+                            _trip.setStartDate(startDate.getTime());
+                            _trip.setEndDate(endDate.getTime());
 
                         } catch (ParseException e) {
                             e.printStackTrace();

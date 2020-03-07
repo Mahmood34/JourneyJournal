@@ -15,11 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.activities.TripDetailsActivity;
 import com.mahmood.journeyjournal.adapters.TripAdapter;
@@ -36,46 +31,17 @@ public class HomeFragment extends Fragment {
     private RecyclerView _recyclerView;
 
     TextView tripName, startDate, endDate, notes, companions;
-    DatabaseReference mDatabase;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Trip");
-
-
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnap : dataSnapshot.getChildren()) {
-
-                    String endDate = dataSnap.child("endDate").getValue().toString();
-                    String startDate = dataSnap.child("startDate").getValue().toString();
-                    String title = dataSnap.child("title").getValue().toString();
-                    String id = dataSnap.child("id").getValue().toString();
-                    String notes = dataSnap.child("notes").getValue().toString();
-
-
-                    // Use your object as needed
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
         _homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-
 
         AddTripClickListener addTripListener = (trip) -> addTripClick(trip);
 
         RecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
 
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
-        _recyclerView = root.findViewById(R.id.recycler_view_home1);
+        _recyclerView = root.findViewById(R.id.recycler_view_home);
 
         _homeViewModel.getTrips().observe(this, trips -> {
             TripAdapter tripAdapter = new TripAdapter(trips, recyclerViewListener);

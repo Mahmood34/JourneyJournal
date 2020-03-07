@@ -17,6 +17,7 @@ import com.mahmood.journeyjournal.models.Trip;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TripAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private DateFormat _formatter = SimpleDateFormat.getDateInstance();
@@ -43,15 +44,15 @@ public class TripAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         if (holder instanceof TripViewHolder) {
             TripViewHolder tripViewHolder = (TripViewHolder) holder;
-            TextView titleTextView = tripViewHolder.getName();
+            TextView titleTextView = tripViewHolder.getTitle();
             TextView startDateTextView = tripViewHolder.getStartDate();
             TextView endDateTextView = tripViewHolder.getEndDate();
             TextView notesTextView = tripViewHolder.getNotes();
             TextView companionTextView = tripViewHolder.getCompanions();
 
             titleTextView.setText(trip.getTitle());
-            startDateTextView.setText(_formatter.format(trip.getStartDate()));
-            endDateTextView.setText(_formatter.format(trip.getEndDate()));
+            startDateTextView.setText(_formatter.format(new Date(trip.getStartDate())));
+            endDateTextView.setText(_formatter.format(new Date(trip.getEndDate())));
             notesTextView.setText(trip.getNotes());
             companionTextView.setText("Companions : " + trip.getCompanions().size());
         }

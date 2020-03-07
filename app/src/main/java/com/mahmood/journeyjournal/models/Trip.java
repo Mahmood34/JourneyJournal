@@ -3,6 +3,8 @@ package com.mahmood.journeyjournal.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.PropertyName;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -20,13 +22,18 @@ public class Trip implements Parcelable {
             return new Trip[size];
         }
     };
+
     private UUID _id;
     private String _title;
     private Date _startDate;
     private Date _endDate;
-    private ArrayList<TripPhoto> _tripPhotos;
+    private ArrayList<TripPhoto> _tripPhotos = new ArrayList<>();
     private String _notes;
-    private ArrayList<Person> _companions;
+    private ArrayList<Person> _companions = new ArrayList<>();
+
+    public Trip(){
+
+    }
 
     public Trip(String title, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes, ArrayList<Person> companions) {
         _id = UUID.randomUUID();
@@ -78,10 +85,16 @@ public class Trip implements Parcelable {
         _companions = in.readArrayList(Person.class.getClassLoader());
     }
 
-    public UUID getId() {
-        return _id;
+    @PropertyName("id")
+    public String getId() {
+        return _id.toString();
     }
 
+    public void setId(String id){
+        this._id = UUID.fromString(id);
+    }
+
+    @PropertyName("title")
     public String getTitle() {
         return _title;
     }
@@ -90,22 +103,25 @@ public class Trip implements Parcelable {
         this._title = title;
     }
 
-    public Date getStartDate() {
-        return _startDate;
+    @PropertyName("startDate")
+    public long getStartDate() {
+        return _startDate.getTime();
     }
 
-    public void setStartDate(Date startDate) {
-        _startDate = startDate;
+    public void setStartDate(long startDate) {
+        _startDate = new Date(startDate);
     }
 
-    public Date getEndDate() {
-        return _endDate;
+    @PropertyName("endDate")
+    public long getEndDate() {
+        return _endDate.getTime();
     }
 
-    public void setEndDate(Date endDate) {
-        _endDate = endDate;
+    public void setEndDate(long endDate) {
+        _endDate = new Date(endDate);
     }
 
+    @PropertyName("notes")
     public String getNotes() {
         return _notes;
     }

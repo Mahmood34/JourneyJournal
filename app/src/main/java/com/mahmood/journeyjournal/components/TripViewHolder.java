@@ -34,12 +34,12 @@ public class TripViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         _listener.onItemClick(v, getAdapterPosition());
     }
 
-    public TextView getName() {
+    public TextView getTitle() {
         return _titleTextView;
     }
 
-    public void setName(TextView name) {
-        _titleTextView = name;
+    public void setTitle(TextView title) {
+        _titleTextView = title;
     }
 
     public TextView getStartDate() {

@@ -26,8 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implements View.OnClickListener {
-    DatabaseReference reff;
-    private DateFormat _formatter = new SimpleDateFormat("MM/dd/yyyy");
+    private DatabaseReference _tripRef;
+    private DateFormat _formatter = SimpleDateFormat.getDateInstance();
     private AddTripClickListener _listener;
     private EditText _titleEditText;
     private EditText _notesEditText;
@@ -39,6 +39,7 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
 
     public AddTripBottomSheetFragment(AddTripClickListener listener) {
         _listener = listener;
+
     }
 
     @Override
@@ -93,7 +94,7 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
             datePickerDialog.show();
         });
 
-        reff = FirebaseDatabase.getInstance().getReference().child("Trip");
+        _tripRef = FirebaseDatabase.getInstance().getReference().child("Trips");
     }
 
     @Override
@@ -103,7 +104,7 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
             Date endDate = _formatter.parse(_endDateButton.getText().toString());
             trip = new Trip(_titleEditText.getText().toString(), startDate, endDate, _notesEditText.getText().toString());
             _listener.onClick(trip);
-            reff.child(trip.getTitle()).setValue(trip);
+            _tripRef.child(trip.getId()).setValue(trip);
             Toast.makeText(v.getContext(), "Success", Toast.LENGTH_SHORT).show();
 
             dismiss();
