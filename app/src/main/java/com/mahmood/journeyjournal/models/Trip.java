@@ -52,7 +52,6 @@ public class Trip implements Parcelable {
         _endDate = endDate;
         _tripPhotos = tripPhotos;
         _notes = notes;
-        _companions = new ArrayList<>();
     }
 
     public Trip(String title, Date startDate, Date endDate, String notes, ArrayList<Person> companions) {
@@ -60,7 +59,6 @@ public class Trip implements Parcelable {
         _title = title;
         _startDate = startDate;
         _endDate = endDate;
-        _tripPhotos = new ArrayList<>();
         _notes = notes;
         _companions = companions;
     }
@@ -70,9 +68,7 @@ public class Trip implements Parcelable {
         _title = title;
         _startDate = startDate;
         _endDate = endDate;
-        _tripPhotos = new ArrayList<>();
         _notes = notes;
-        _companions = new ArrayList<>();
     }
 
     protected Trip(Parcel in) {
@@ -85,7 +81,6 @@ public class Trip implements Parcelable {
         _companions = in.readArrayList(Person.class.getClassLoader());
     }
 
-    @PropertyName("id")
     public String getId() {
         return _id.toString();
     }
@@ -94,7 +89,6 @@ public class Trip implements Parcelable {
         this._id = UUID.fromString(id);
     }
 
-    @PropertyName("title")
     public String getTitle() {
         return _title;
     }
@@ -103,7 +97,6 @@ public class Trip implements Parcelable {
         this._title = title;
     }
 
-    @PropertyName("startDate")
     public long getStartDate() {
         return _startDate.getTime();
     }
@@ -112,7 +105,6 @@ public class Trip implements Parcelable {
         _startDate = new Date(startDate);
     }
 
-    @PropertyName("endDate")
     public long getEndDate() {
         return _endDate.getTime();
     }
@@ -121,7 +113,6 @@ public class Trip implements Parcelable {
         _endDate = new Date(endDate);
     }
 
-    @PropertyName("notes")
     public String getNotes() {
         return _notes;
     }
@@ -142,7 +133,7 @@ public class Trip implements Parcelable {
         _companions = people;
     }
 
-    public void addCompainion(Person person) {
+    public void addCompanion(Person person) {
         _companions.add(person);
     }
 
@@ -150,7 +141,7 @@ public class Trip implements Parcelable {
         _companions.addAll(people);
     }
 
-    public void removeCompainion(Person person) {
+    public void removeCompanion(Person person) {
         _companions.remove(person);
     }
 
@@ -208,6 +199,5 @@ public class Trip implements Parcelable {
         dest.writeList(_tripPhotos);
         dest.writeString(_notes);
         dest.writeList(_companions);
-
     }
 }

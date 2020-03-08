@@ -31,7 +31,7 @@ public class GalleryFragment extends Fragment {
                 ViewModelProviders.of(this).get(GalleryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         RecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
-        //_recyclerView = root.findViewById(R.id.recycler_view_gallery);
+        _recyclerView = root.findViewById(R.id.trip_details_recycler_view_gallery);
         _galleryViewModel.getAllTripPhotos().observe(this, new Observer<ArrayList<TripPhoto>>() {
             @Override
             public void onChanged(ArrayList<TripPhoto> trips) {

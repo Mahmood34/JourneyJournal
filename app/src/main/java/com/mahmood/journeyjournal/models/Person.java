@@ -17,8 +17,13 @@ public class Person implements Parcelable {
             return new Person[size];
         }
     };
+
     private UUID _id;
     private String _name;
+
+    public Person(){
+
+    }
 
     public Person(String name) {
         _id = UUID.randomUUID();
@@ -31,16 +36,20 @@ public class Person implements Parcelable {
         _name = in.readString();
     }
 
-    public UUID getId() {
-        return _id;
+    public String getId() {
+        return _id.toString();
     }
 
     public String getName() {
         return _name;
     }
 
-    public void setName(String _name) {
-        this._name = _name;
+    public void setId(String id){
+        _id = UUID.fromString(id);
+    }
+
+    public void setName(String name) {
+        _name = name;
     }
 
     @Override

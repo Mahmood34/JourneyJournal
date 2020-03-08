@@ -25,6 +25,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.adapters.GalleryAdapter;
 import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
@@ -52,6 +54,7 @@ public class TripDetailsActivity extends AppCompatActivity {
     private ImageButton _addCompanionButton;
     private ImageButton _addPhotoButton;
     private RecyclerView _recyclerView;
+    private DatabaseReference _databaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,16 +79,17 @@ public class TripDetailsActivity extends AppCompatActivity {
         GalleryAdapter galleryAdapter = new GalleryAdapter(_trip.getTripPhotos(), recyclerViewListener);
         _recyclerView.setAdapter(galleryAdapter);
         _recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton editFab = findViewById(R.id.fab);
         _titleEditText.setText(_trip.getTitle());
         _notesEditText.setText(_trip.getNotes());
         _startDateButton.setText(_formatter.format(_trip.getStartDate()));
         _endDateButton.setText(_formatter.format(_trip.getEndDate()));
         _companionsButton.setText("Companions: " + _trip.getCompanions().size());
+        _databaseRef = FirebaseDatabase.getInstance().getReference();
 
         //region onClickListener
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        editFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 isEditing = !isEditing;
@@ -107,7 +111,7 @@ public class TripDetailsActivity extends AppCompatActivity {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-
+                        _databaseRef.child("Trips").child(_trip.getId()).setValue(_trip);
                     }
                 }
                 _titleEditText.setEnabled(isEditing);
@@ -193,7 +197,7 @@ public class TripDetailsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         EditText editText = addCompanionView.findViewById(R.id.alert_dialog_companion_edit_text);
                         Person person = new Person(editText.getText().toString());
-                        _trip.addCompainion(person);
+                        _trip.addCompanion(person);
                         _companionsButton.setText("Companions: " + _trip.getCompanions().size());
                     }
                 });
@@ -248,6 +252,7 @@ public class TripDetailsActivity extends AppCompatActivity {
         intent.putExtra("photo", _trip.getTripPhoto(position));
         startActivityForResult(intent, 1);
     }
+
     private void createIntent() {
         Intent intent = getIntent();
         intent.putExtra("updatedTrip", _trip);

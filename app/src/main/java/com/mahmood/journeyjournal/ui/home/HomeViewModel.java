@@ -81,14 +81,14 @@ public class HomeViewModel extends ViewModel {
      */
     private void loadTrips() {
         _trips = new MutableLiveData<>();
-        _database = FirebaseDatabase.getInstance().getReference().child("Trips");
+        _database = FirebaseDatabase.getInstance().getReference();
 
         ValueEventListener tripListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Trip> trips = new ArrayList<>();
                 for (DataSnapshot ds :
-                        dataSnapshot.getChildren()) {
+                        dataSnapshot.child("Trips").getChildren()) {
                     Trip trip = ds.getValue(Trip.class);
                     trips.add(trip);
                 }
