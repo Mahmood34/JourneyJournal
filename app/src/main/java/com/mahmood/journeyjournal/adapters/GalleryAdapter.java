@@ -21,7 +21,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private ArrayList<TripPhoto> _tripPhotos;
     private RecyclerViewClickListener _listener;
-    private Context context;
 
     public GalleryAdapter(ArrayList<TripPhoto> tripPhotos, RecyclerViewClickListener listener) {
         _tripPhotos = tripPhotos;
@@ -31,7 +30,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context = parent.getContext();
+        Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View galleryView = layoutInflater.inflate(R.layout.recyclerview_gallery, parent, false);
         return new GalleryViewHolder(galleryView, _listener);
@@ -43,7 +42,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder instanceof GalleryViewHolder) {
             GalleryViewHolder galleryViewHolder = (GalleryViewHolder) holder;
             ImageView imageView = galleryViewHolder.getImage();
-
             imageView.setImageURI(Uri.parse(photo.getImage()));
         }
     }

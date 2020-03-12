@@ -28,7 +28,6 @@ public class Trip implements Parcelable {
     private ArrayList<TripPhoto> _tripPhotos = new ArrayList<>();
     private String _notes;
     private ArrayList<Person> _companions = new ArrayList<>();
-    private ArrayList<VisitedPlace> _visitedPlaces = new ArrayList<>();
 
     public Trip(){
 
@@ -182,14 +181,6 @@ public class Trip implements Parcelable {
 
     public void removeAllTripPhotos() {
         _tripPhotos = new ArrayList<>();
-    }
-
-    public ArrayList<VisitedPlace> get_visitedPlaces() {
-        return _visitedPlaces;
-    }
-
-    public void set_visitedPlaces(ArrayList<VisitedPlace> _visitedPlaces) {
-        this._visitedPlaces = _visitedPlaces;
     }
 
     @Override

@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mahmood.journeyjournal.R;
@@ -35,7 +34,6 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
     private Button _startDateButton;
     private Button _endDateButton;
     private Button _confirmButton;
-    private String _userid;
 
     Trip trip;
 
@@ -104,10 +102,9 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
         try {
             Date startDate = _formatter.parse(_startDateButton.getText().toString());
             Date endDate = _formatter.parse(_endDateButton.getText().toString());
-            _userid = FirebaseAuth.getInstance().getUid();
             trip = new Trip(_titleEditText.getText().toString(), startDate, endDate, _notesEditText.getText().toString());
             _listener.onClick(trip);
-            _tripRef.child(_userid).child(trip.getId()).setValue(trip);
+            _tripRef.child(trip.getId()).setValue(trip);
             Toast.makeText(v.getContext(), "Success", Toast.LENGTH_SHORT).show();
 
             dismiss();

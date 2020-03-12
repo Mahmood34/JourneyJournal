@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +18,6 @@ public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<ArrayList<Trip>> _trips;
     private DatabaseReference _database;
-    private String _userid;
 
     public Trip getTrip(String id) {
         if (_trips == null) {
@@ -84,9 +82,8 @@ public class HomeViewModel extends ViewModel {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Trip> trips = new ArrayList<>();
-                _userid = FirebaseAuth.getInstance().getUid();
                 for (DataSnapshot ds :
-                        dataSnapshot.child("Trips").child(_userid).getChildren()) {
+                        dataSnapshot.child("Trips").getChildren()) {
                     Trip trip = ds.getValue(Trip.class);
                     trips.add(trip);
                 }

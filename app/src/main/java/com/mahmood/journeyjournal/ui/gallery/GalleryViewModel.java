@@ -95,10 +95,10 @@ public class GalleryViewModel extends ViewModel {
         ArrayList<Trip> trips = new ArrayList<>();
         Date today = Calendar.getInstance().getTime();
 
-//        trips.add(new Trip("Barcelona", today, today, "A Week in Barcelona"));
-//        trips.add(new Trip("London", today, today, "With family"));
-//        trips.add(new Trip("Madrid", today, today, "Adventure"));
-//        trips.add(new Trip("Paris", today, today, "Date night with the wife"));
+        trips.add(new Trip("Barcelona", today, today, "A Week in Barcelona"));
+        trips.add(new Trip("London", today, today, "With family"));
+        trips.add(new Trip("Madrid", today, today, "Adventure"));
+        trips.add(new Trip("Paris", today, today, "Date night with the wife"));
 
 
         _trips = new MutableLiveData<>(trips);
