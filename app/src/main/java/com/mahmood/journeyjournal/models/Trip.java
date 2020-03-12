@@ -3,8 +3,6 @@ package com.mahmood.journeyjournal.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.firebase.database.PropertyName;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -30,6 +28,7 @@ public class Trip implements Parcelable {
     private ArrayList<TripPhoto> _tripPhotos = new ArrayList<>();
     private String _notes;
     private ArrayList<Person> _companions = new ArrayList<>();
+    private ArrayList<VisitedPlace> _visitedPlaces = new ArrayList<>();
 
     public Trip(){
 
@@ -183,6 +182,14 @@ public class Trip implements Parcelable {
 
     public void removeAllTripPhotos() {
         _tripPhotos = new ArrayList<>();
+    }
+
+    public ArrayList<VisitedPlace> get_visitedPlaces() {
+        return _visitedPlaces;
+    }
+
+    public void set_visitedPlaces(ArrayList<VisitedPlace> _visitedPlaces) {
+        this._visitedPlaces = _visitedPlaces;
     }
 
     @Override

@@ -1,12 +1,11 @@
 package com.mahmood.journeyjournal.ui.home;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,14 +14,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.mahmood.journeyjournal.models.Trip;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.UUID;
 
 public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<ArrayList<Trip>> _trips;
     private DatabaseReference _database;
+    private String _userid;
 
     public Trip getTrip(String id) {
         if (_trips == null) {
@@ -87,8 +84,9 @@ public class HomeViewModel extends ViewModel {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Trip> trips = new ArrayList<>();
+                _userid = FirebaseAuth.getInstance().getUid();
                 for (DataSnapshot ds :
-                        dataSnapshot.child("Trips").getChildren()) {
+                        dataSnapshot.child("Trips").child(_userid).getChildren()) {
                     Trip trip = ds.getValue(Trip.class);
                     trips.add(trip);
                 }

@@ -3,11 +3,8 @@ package com.mahmood.journeyjournal.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.UUID;
-
 public class TripPhoto implements Parcelable {
 
-    private UUID _id;
     private String _name;
     private String _image;
 
@@ -16,13 +13,11 @@ public class TripPhoto implements Parcelable {
     }
 
     public TripPhoto(String name, String image) {
-        _id = UUID.randomUUID();
         _name = name;
         _image = image;
     }
 
     private TripPhoto(Parcel in) {
-        _id = UUID.fromString(in.readString());
         _name = in.readString();
         _image = in.readString();
     }
@@ -38,12 +33,6 @@ public class TripPhoto implements Parcelable {
             return new TripPhoto[size];
         }
     };
-
-    public String getId() {
-        return _id.toString();
-    }
-
-    public void setId(String id){ _id = UUID.fromString(id); }
 
     public String getName() {
         return _name;
@@ -64,8 +53,8 @@ public class TripPhoto implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(_id.toString());
         dest.writeString(_name);
         dest.writeString(_image);
     }
+
 }

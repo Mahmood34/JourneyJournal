@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mahmood.journeyjournal.R;
@@ -55,6 +56,7 @@ public class TripDetailsActivity extends AppCompatActivity {
     private ImageButton _addPhotoButton;
     private RecyclerView _recyclerView;
     private DatabaseReference _databaseRef;
+    private String _userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class TripDetailsActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         RecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
         _trip = getIntent().getExtras().getParcelable("trip");
         _titleEditText = findViewById(R.id.trip_details_edit_text_title);
@@ -87,8 +91,8 @@ public class TripDetailsActivity extends AppCompatActivity {
         _companionsButton.setText("Companions: " + _trip.getCompanions().size());
         _databaseRef = FirebaseDatabase.getInstance().getReference();
 
-        //region onClickListener
 
+        //region onClickListener
         editFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +115,8 @@ public class TripDetailsActivity extends AppCompatActivity {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        _databaseRef.child("Trips").child(_trip.getId()).setValue(_trip);
+                        _userid = FirebaseAuth.getInstance().getUid();
+                        _databaseRef.child("Trips").child(_userid).child(_trip.getId()).setValue(_trip);
                     }
                 }
                 _titleEditText.setEnabled(isEditing);
@@ -121,7 +126,6 @@ public class TripDetailsActivity extends AppCompatActivity {
 
             }
         });
-
 
         _startDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +168,7 @@ public class TripDetailsActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
         _companionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

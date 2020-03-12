@@ -15,7 +15,7 @@ public class GalleryViewHolder extends RecyclerView.ViewHolder implements View.O
 
     public GalleryViewHolder(@NonNull View itemView, RecyclerViewClickListener listener) {
         super(itemView);
-        _imageView = itemView.findViewById(R.id.trip_details_recycler_view_gallery);
+        _imageView = itemView.findViewById(R.id.recycler_view_gallery);
         _listener = listener;
         itemView.setOnClickListener(this);
     }
@@ -26,6 +26,7 @@ public class GalleryViewHolder extends RecyclerView.ViewHolder implements View.O
     }
 
     public ImageView getImage() {
+
         return _imageView;
     }
 
