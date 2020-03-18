@@ -35,4 +35,7 @@
             android:value="AIzaSyAmxJYtW1YcjX3hWTJFHaMMYopP112xXk4" />
     </application>
 
+    <uses-feature android:name="android.hardware.Camera"
+        android:required="true"/>
+
 </manifest>

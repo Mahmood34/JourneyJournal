@@ -22,7 +22,6 @@
             android:id="@+id/trip_details_edit_text_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
             android:textSize="36sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -50,7 +49,6 @@
                 android:id="@+id/trip_details_button_start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
                 android:textAllCaps="false"/>
         </LinearLayout>
 
@@ -73,7 +71,6 @@
                 android:id="@+id/trip_details_button_end_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
                 android:textAllCaps="false"/>
         </LinearLayout>
     </LinearLayout>
@@ -90,8 +87,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/trip_details_edit_text_notes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false" />
+            android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

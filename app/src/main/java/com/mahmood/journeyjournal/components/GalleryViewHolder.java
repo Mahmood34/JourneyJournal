@@ -15,14 +15,16 @@ public class GalleryViewHolder extends RecyclerView.ViewHolder implements View.O
 
     public GalleryViewHolder(@NonNull View itemView, RecyclerViewClickListener listener) {
         super(itemView);
-        _imageView = itemView.findViewById(R.id.trip_details_recycler_view_gallery);
+        _imageView = itemView.findViewById(R.id.image_view_gallery);
         _listener = listener;
         itemView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        _listener.onItemClick(v, getAdapterPosition());
+        if (_listener != null) {
+            _listener.onItemClick(v, getAdapterPosition());
+        }
     }
 
     public ImageView getImage() {

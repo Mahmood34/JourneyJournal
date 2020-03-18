@@ -49,6 +49,7 @@ public class HomeFragment extends Fragment {
         });
 
         FloatingActionButton button = getActivity().findViewById(R.id.floating_action_button);
+        button.show();
         button.setOnClickListener(v -> {
             final AddTripBottomSheetFragment sheetDialog = new AddTripBottomSheetFragment(addTripListener);
             sheetDialog.show(getFragmentManager(), sheetDialog.getTag());

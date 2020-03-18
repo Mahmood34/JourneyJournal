@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mahmood.journeyjournal.DatabaseConstant;
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.interfaces.AddTripClickListener;
 import com.mahmood.journeyjournal.models.Trip;
@@ -26,7 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implements View.OnClickListener {
-    private DatabaseReference _tripRef;
+
     private DateFormat _formatter = SimpleDateFormat.getDateInstance();
     private AddTripClickListener _listener;
     private EditText _titleEditText;
@@ -35,11 +36,12 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
     private Button _endDateButton;
     private Button _confirmButton;
 
-    Trip trip;
+    private Trip _trip;
+
+    private DatabaseReference _tripRef;
 
     public AddTripBottomSheetFragment(AddTripClickListener listener) {
         _listener = listener;
-
     }
 
     @Override
@@ -94,7 +96,7 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
             datePickerDialog.show();
         });
 
-        _tripRef = FirebaseDatabase.getInstance().getReference().child("Trips");
+        _tripRef = FirebaseDatabase.getInstance().getReference().child(DatabaseConstant.TRIP_REPOSITORY);
     }
 
     @Override
@@ -102,16 +104,13 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
         try {
             Date startDate = _formatter.parse(_startDateButton.getText().toString());
             Date endDate = _formatter.parse(_endDateButton.getText().toString());
-            trip = new Trip(_titleEditText.getText().toString(), startDate, endDate, _notesEditText.getText().toString());
-            _listener.onClick(trip);
-            _tripRef.child(trip.getId()).setValue(trip);
+            _trip = new Trip(_titleEditText.getText().toString(), startDate, endDate, _notesEditText.getText().toString());
+            _listener.onClick(_trip);
+            _tripRef.child(_trip.getId()).setValue(_trip);
             Toast.makeText(v.getContext(), "Success", Toast.LENGTH_SHORT).show();
-
             dismiss();
-
         } catch (ParseException e) {
             Toast.makeText(v.getContext(), "Invalid", Toast.LENGTH_SHORT).show();
-
         }
     }
 

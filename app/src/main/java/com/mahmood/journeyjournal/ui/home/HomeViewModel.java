@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mahmood.journeyjournal.DatabaseConstant;
 import com.mahmood.journeyjournal.models.Trip;
 
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class HomeViewModel extends ViewModel {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Trip> trips = new ArrayList<>();
                 for (DataSnapshot ds :
-                        dataSnapshot.child("Trips").getChildren()) {
+                        dataSnapshot.child(DatabaseConstant.TRIP_REPOSITORY).getChildren()) {
                     Trip trip = ds.getValue(Trip.class);
                     trips.add(trip);
                 }

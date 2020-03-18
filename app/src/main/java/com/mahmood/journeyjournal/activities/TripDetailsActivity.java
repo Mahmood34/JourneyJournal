@@ -4,9 +4,13 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +31,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mahmood.journeyjournal.DatabaseConstant;
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.adapters.GalleryAdapter;
 import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
@@ -42,6 +47,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TripDetailsActivity extends AppCompatActivity {
+    private static final int REQUEST_IMAGE_CAPTURE = 101;
+    private static final int REQUEST_SELECT_IMAGE = 102;
     private int _resultCode = RESULT_CANCELED;
     private DateFormat _formatter = SimpleDateFormat.getDateInstance();
     private Trip _trip;
@@ -63,7 +70,6 @@ public class TripDetailsActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         RecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
@@ -79,7 +85,6 @@ public class TripDetailsActivity extends AppCompatActivity {
         GalleryAdapter galleryAdapter = new GalleryAdapter(_trip.getTripPhotos(), recyclerViewListener);
         _recyclerView.setAdapter(galleryAdapter);
         _recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
-        FloatingActionButton editFab = findViewById(R.id.fab);
         _titleEditText.setText(_trip.getTitle());
         _notesEditText.setText(_trip.getNotes());
         _startDateButton.setText(_formatter.format(_trip.getStartDate()));
@@ -88,41 +93,6 @@ public class TripDetailsActivity extends AppCompatActivity {
         _databaseRef = FirebaseDatabase.getInstance().getReference();
 
         //region onClickListener
-
-        editFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isEditing = !isEditing;
-                Snackbar.make(view, isEditing ? "Now editing" : "Confirmed", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                if (isEditing) {
-
-                } else {
-                    if (_trip.getNotes() != _notesEditText.getText().toString() || _trip.getTitle() != _titleEditText.getText().toString()) {
-                        _resultCode = RESULT_OK;
-                        _trip.setTitle(_titleEditText.getText().toString());
-                        _trip.setNotes(_notesEditText.getText().toString());
-                        try {
-                            Date startDate = _formatter.parse(_startDateButton.getText().toString());
-                            Date endDate = _formatter.parse(_endDateButton.getText().toString());
-                            _trip.setStartDate(startDate.getTime());
-                            _trip.setEndDate(endDate.getTime());
-
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        _databaseRef.child("Trips").child(_trip.getId()).setValue(_trip);
-                    }
-                }
-                _titleEditText.setEnabled(isEditing);
-                _notesEditText.setEnabled(isEditing);
-                _startDateButton.setEnabled(isEditing);
-                _endDateButton.setEnabled(isEditing);
-
-            }
-        });
-
-
         _startDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,22 +175,65 @@ public class TripDetailsActivity extends AppCompatActivity {
             }
         });
 
-        _addPhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select picture"), 1);
-            }
+//        _addPhotoButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select picture"), 1);
+//            }
+//        });
+        _addPhotoButton.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle(R.string.choose_photo_mode)
+                    .setItems(R.array.choose_photo_mode_array, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (which == 0){
+                                takePicture();
+                            }
+                            else if (which == 1){
+                                choosePicture();
+                            }
+                        }
+                    });
+            builder.show();
         });
         //endregion
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.trip_details_menu, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        createIntent();
-        finish();
+        switch (item.getItemId()){
+            case R.id.trip_detail_save_menu_item:
+                if (_trip.getNotes() != _notesEditText.getText().toString() || _trip.getTitle() != _titleEditText.getText().toString()) {
+                    _resultCode = RESULT_OK;
+                    _trip.setTitle(_titleEditText.getText().toString());
+                    _trip.setNotes(_notesEditText.getText().toString());
+                    try {
+                        Date startDate = _formatter.parse(_startDateButton.getText().toString());
+                        Date endDate = _formatter.parse(_endDateButton.getText().toString());
+                        _trip.setStartDate(startDate.getTime());
+                        _trip.setEndDate(endDate.getTime());
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    _databaseRef.child(DatabaseConstant.TRIP_REPOSITORY).child(_trip.getId()).setValue(_trip);
+                    Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                createIntent();
+                finish();
+        }
         return true;
     }
 
@@ -234,15 +247,18 @@ public class TripDetailsActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         try {
             super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == 1 && resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_SELECT_IMAGE && resultCode == RESULT_OK) {
                 Uri imageUri = data.getData();
                 TripPhoto tripPhoto = new TripPhoto(_trip.getTitle() + _trip.getTripPhotos().size(), imageUri.toString());
                 _trip.addTripPhoto(tripPhoto);
                 _recyclerView.getAdapter().notifyDataSetChanged();
-
+            }
+            else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
             }
         } catch (Exception exception) {
-            Toast.makeText(getApplicationContext(), exception.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), exception.toString(), Toast.LENGTH_LONG).show();
         }
 
     }
@@ -257,6 +273,20 @@ public class TripDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         intent.putExtra("updatedTrip", _trip);
         setResult(_resultCode, intent);
+    }
+
+    private void takePicture(){
+        Intent imageTakeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (imageTakeIntent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(imageTakeIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    private void choosePicture(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+        startActivityForResult(Intent.createChooser(intent, "Select picture"), REQUEST_SELECT_IMAGE);
     }
 
 }
