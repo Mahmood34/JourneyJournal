@@ -32,4 +32,14 @@
     <string name="title_activity_trip">Trip</string>
     <string name="title_activity_visited_places">Visited Place</string>
     <string name="visited_place_notes">Notes</string>
+    <string name="add_visited_place">Add Visited Place</string>
+    <string name="trip_details_title">Title</string>
+    <string name="trip_details_start_date">Start Date</string>
+    <string name="trip_detail_end_date">End Date</string>
+    <string name="trip_details_notes">Notes</string>
+    <string name="trip_details_companions">Companions</string>
+    <string name="trip_details_add_companion">Add</string>
+    <string name="visited_places_button">Visited places</string>
+    <string name="trip_details_gallery">Gallery</string>
+    <string name="trip_details_add_photo">Add Photo</string>
 </resources>

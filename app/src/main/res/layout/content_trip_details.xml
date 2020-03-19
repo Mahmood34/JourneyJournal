@@ -17,7 +17,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Title">
+        android:hint="@string/trip_details_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/trip_details_edit_text_title"
@@ -29,7 +29,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/activity_vertical_margin"
-                android:text="Start Date"
+                android:text="@string/trip_details_start_date"
                 android:textAlignment="textStart"
                 android:textSize="15sp" />
 
@@ -64,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/activity_vertical_margin"
-                android:text="End Date"
+                android:text="@string/trip_detail_end_date"
                 android:textAlignment="textStart"
                 android:textSize="15sp" />
 
@@ -82,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/activity_vertical_margin"
-        android:hint="Notes">
+        android:hint="@string/trip_details_notes">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/trip_details_edit_text_notes"
@@ -103,7 +104,7 @@
             android:layout_margin="@dimen/activity_vertical_margin"
             android:gravity="center_vertical"
             android:layout_weight="1"
-            android:text="Companions" />
+            android:text="@string/trip_details_companions" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/trip_details_add_companion"
@@ -112,7 +113,7 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_weight="2"
-            android:text="Add"
+            android:text="@string/trip_details_add_companion"
             android:textAlignment="center"
             app:cornerRadius="32sp"
             app:icon="@drawable/ic_add_black_24dp" />
@@ -126,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:padding="32sp"
-        android:text="Visited places"
+        android:text="@string/visited_places_button"
         android:textAllCaps="false"
         android:textSize="28sp"
         app:cornerRadius="32sp" />
@@ -141,7 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="Gallery"
+        android:text="@string/trip_details_gallery"
         android:textAlignment="center"
         android:textSize="28sp" />
 
@@ -151,7 +152,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/activity_vertical_margin"
-        android:text="Add"
+        android:text="@string/trip_details_add_photo"
+        android:textAllCaps="false"
         app:cornerRadius="32sp"
         app:icon="@drawable/ic_add_black_24dp" />
 
