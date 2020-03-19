@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_trip_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -40,7 +41,7 @@
                 android:id="@+id/trip_details_text_start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
                 android:text="Start Date"
                 android:textAlignment="textStart"
                 android:textSize="15sp" />
@@ -49,7 +50,7 @@
                 android:id="@+id/trip_details_button_start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -62,7 +63,7 @@
                 android:id="@+id/trip_details_text_end_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
                 android:text="End Date"
                 android:textAlignment="textStart"
                 android:textSize="15sp" />
@@ -71,7 +72,7 @@
                 android:id="@+id/trip_details_button_end_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
         </LinearLayout>
     </LinearLayout>
 
@@ -80,58 +81,79 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
-        android:layout_marginBottom="8sp"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:hint="Notes">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/trip_details_edit_text_notes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
-        android:layout_marginBottom="8sp">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/trip_details_button_companions"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="9"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_vertical_margin"
             android:gravity="center_vertical"
+            android:layout_weight="1"
             android:text="Companions" />
 
-        <ImageButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/trip_details_add_companion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@android:drawable/ic_input_add" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="9"
-            android:text="Gallery"
-            android:textSize="28sp" />
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_weight="2"
+            android:text="Add"
+            android:textAlignment="center"
+            app:cornerRadius="32sp"
+            app:icon="@drawable/ic_add_black_24dp" />
 
-        <ImageButton
-            android:id="@+id/trip_details_add_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@android:drawable/ic_input_add" />
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/visited_places_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:padding="32sp"
+        android:text="Visited places"
+        android:textAllCaps="false"
+        android:textSize="28sp"
+        app:cornerRadius="32sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="Gallery"
+        android:textAlignment="center"
+        android:textSize="28sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/trip_details_add_photo"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:text="Add"
+        app:cornerRadius="32sp"
+        app:icon="@drawable/ic_add_black_24dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/trip_details_recycler_view_gallery"

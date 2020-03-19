@@ -37,43 +37,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar = findViewById(R.id.log_in_loading);
 
         mAuth = FirebaseAuth.getInstance();
-
-//        Button btn = (Button)findViewById(R.id.login_button);
-//
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//            }
-//        });
-
-
     }
 
-    private void userLogin(){
+    private void userLogin() {
 
         String username = usernameEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        if(username.isEmpty()){
+        if (username.isEmpty()) {
             usernameEditText.setError("Username is required");
             usernameEditText.requestFocus();
             return;
         }
 
-//        if(Patterns.EMAIL_ADDRESS.matcher(username).matches()){
-//            usernameEditText.setError("Enter a valid email");
-//            usernameEditText.requestFocus();
-//            return;
-//        }
-
-        if(password.isEmpty()){
+        if (password.isEmpty()) {
             passwordEditText.setError("Password is required");
             passwordEditText.requestFocus();
             return;
         }
 
-        if(password.length() < 6){
+        if (password.length() < 6) {
             passwordEditText.setError("Minimum password length is 6");
             passwordEditText.requestFocus();
             return;
@@ -86,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
 
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -99,13 +82,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sign_up_button:
-
                 startActivity(new Intent(this, SignupActivity.class));
-
                 break;
-
             case R.id.login_button:
                 userLogin();
                 break;

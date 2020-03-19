@@ -29,6 +29,9 @@ public class Trip implements Parcelable {
     private String _notes;
     private ArrayList<Person> _companions = new ArrayList<>();
 
+
+    private ArrayList<VisitedPlace> _visitedPlaces = new ArrayList<>();
+
     public Trip(){
 
     }
@@ -77,6 +80,7 @@ public class Trip implements Parcelable {
         _tripPhotos = in.readArrayList(TripPhoto.class.getClassLoader());
         _notes = in.readString();
         _companions = in.readArrayList(Person.class.getClassLoader());
+        _visitedPlaces = in.readArrayList(VisitedPlace.class.getClassLoader());
     }
 
     public String getId() {
@@ -183,6 +187,14 @@ public class Trip implements Parcelable {
         _tripPhotos = new ArrayList<>();
     }
 
+    public ArrayList<VisitedPlace> getVisitedPlaces() {
+        return _visitedPlaces;
+    }
+
+    public void setVisitedPlaces(ArrayList<VisitedPlace> _visitedPlaces) {
+        this._visitedPlaces = _visitedPlaces;
+    }
+
     @Override
     public int describeContents() {
         return hashCode();
@@ -197,5 +209,10 @@ public class Trip implements Parcelable {
         dest.writeList(_tripPhotos);
         dest.writeString(_notes);
         dest.writeList(_companions);
+        dest.writeList(_visitedPlaces);
+    }
+
+    public void addVisitedPlace(VisitedPlace visitedPlace) {
+        _visitedPlaces.add(visitedPlace);
     }
 }

@@ -5,10 +5,21 @@ import android.os.Parcelable;
 
 public class TripPhoto implements Parcelable {
 
+    public static final Creator<TripPhoto> CREATOR = new Creator<TripPhoto>() {
+        @Override
+        public TripPhoto createFromParcel(Parcel in) {
+            return new TripPhoto(in);
+        }
+
+        @Override
+        public TripPhoto[] newArray(int size) {
+            return new TripPhoto[size];
+        }
+    };
     private String _name;
     private String _image;
 
-    public  TripPhoto(){
+    public TripPhoto() {
 
     }
 
@@ -22,29 +33,21 @@ public class TripPhoto implements Parcelable {
         _image = in.readString();
     }
 
-    public static final Creator<TripPhoto> CREATOR = new Creator<TripPhoto>() {
-        @Override
-        public TripPhoto createFromParcel(Parcel in) {
-            return new TripPhoto(in);
-        }
-
-        @Override
-        public TripPhoto[] newArray(int size) {
-            return new TripPhoto[size];
-        }
-    };
-
     public String getName() {
         return _name;
     }
 
-    public void setName(String name){ _name = name; }
+    public void setName(String name) {
+        _name = name;
+    }
 
     public String getImage() {
         return _image;
     }
 
-    public void setImage(String image){ _image = image; }
+    public void setImage(String image) {
+        _image = image;
+    }
 
     @Override
     public int describeContents() {

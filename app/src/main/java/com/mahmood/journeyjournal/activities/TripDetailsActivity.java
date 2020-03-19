@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,19 +15,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mahmood.journeyjournal.DatabaseConstant;
@@ -58,8 +52,9 @@ public class TripDetailsActivity extends AppCompatActivity {
     private Button _startDateButton;
     private Button _endDateButton;
     private Button _companionsButton;
-    private ImageButton _addCompanionButton;
-    private ImageButton _addPhotoButton;
+    private Button _addCompanionButton;
+    private Button _visitedPlacesButton;
+    private Button _addPhotoButton;
     private RecyclerView _recyclerView;
     private DatabaseReference _databaseRef;
 
@@ -68,23 +63,21 @@ public class TripDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_details);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         RecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
         _trip = getIntent().getExtras().getParcelable("trip");
+        setTitle(_trip.getTitle());
         _titleEditText = findViewById(R.id.trip_details_edit_text_title);
         _notesEditText = findViewById(R.id.trip_details_edit_text_notes);
         _startDateButton = findViewById(R.id.trip_details_button_start_date);
         _endDateButton = findViewById(R.id.trip_details_button_end_date);
         _companionsButton = findViewById(R.id.trip_details_button_companions);
         _addCompanionButton = findViewById(R.id.trip_details_add_companion);
+        _visitedPlacesButton = findViewById(R.id.visited_places_button);
         _addPhotoButton = findViewById(R.id.trip_details_add_photo);
         _recyclerView = findViewById(R.id.trip_details_recycler_view_gallery);
         GalleryAdapter galleryAdapter = new GalleryAdapter(_trip.getTripPhotos(), recyclerViewListener);
         _recyclerView.setAdapter(galleryAdapter);
-        _recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
+        _recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1));
         _titleEditText.setText(_trip.getTitle());
         _notesEditText.setText(_trip.getNotes());
         _startDateButton.setText(_formatter.format(_trip.getStartDate()));
@@ -175,15 +168,15 @@ public class TripDetailsActivity extends AppCompatActivity {
             }
         });
 
-//        _addPhotoButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select picture"), 1);
-//            }
-//        });
+        _visitedPlacesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), TripVisitedPlaceActivity.class);
+                intent.putExtra("trip", _trip);
+                startActivityForResult(intent, 1);
+            }
+        });
+
         _addPhotoButton.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             builder.setTitle(R.string.choose_photo_mode)
@@ -229,6 +222,44 @@ public class TripDetailsActivity extends AppCompatActivity {
                     _databaseRef.child(DatabaseConstant.TRIP_REPOSITORY).child(_trip.getId()).setValue(_trip);
                     Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.trip_detail_share_button_item:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                String companionList = "";
+                for (int i = 0; i < _trip.getCompanions().size(); i++) {
+                    companionList += _trip.getCompanion(i).getName() + "\n";
+                }
+                sendIntent.putExtra(Intent.EXTRA_TEXT,
+                        "Hey, this is my trip, " + "\n" + _trip.getTitle() + "\n" +
+                                "these are my notes I took: " + "\n" + _trip.getNotes() + "\n" +
+                                "And these are the people I went with:" + "\n" + companionList);
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+                break;
+            case R.id.trip_detail_delete_trip_item:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Delete trip");
+                builder.setMessage("You are about to delete this trip. To confirm this delete, press the back button?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        _databaseRef.child(DatabaseConstant.TRIP_REPOSITORY).child(_trip.getId()).removeValue();
+
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "You've changed your mind to delete all records", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.show();
                 break;
             default:
                 createIntent();

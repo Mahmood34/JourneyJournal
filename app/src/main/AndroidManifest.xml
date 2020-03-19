@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mahmood.journeyjournal">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,11 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.TripVisitedPlaceActivity"
+            android:label="@string/title_activity_visited_places"
+            android:parentActivityName=".activities.TripDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mahmood.journeyjournal.activities.TripDetailsActivity" />
+        </activity>
         <activity android:name=".activities.TripPhotoDetailsActivity" />
         <activity
             android:name=".activities.TripDetailsActivity"
             android:label="@string/title_activity_trip_details"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mahmood.journeyjournal.MainActivity" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
@@ -25,11 +42,13 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAmxJYtW1YcjX3hWTJFHaMMYopP112xXk4" />

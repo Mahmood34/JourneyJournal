@@ -4,88 +4,93 @@
     android:layout_height="fill_parent">
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    android:orientation="vertical"
+        android:orientation="vertical"
         android:padding="32dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textSize="72sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="50dp"
-            android:text="@string/app_name"
-            android:textSize="72sp" />
+            android:text="@string/sign_up"
+            android:textSize="28sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        android:textSize="28sp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:hint="@string/email">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_edit_text"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:selectAllOnFocus="true" />
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:hint="@string/email">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:selectAllOnFocus="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:hint="@string/password"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_edit_text"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:selectAllOnFocus="true" />
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:hint="@string/password"
+            app:passwordToggleEnabled="true">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true" />
 
-    <Button
-        style="@style/Widget.AppCompat.Button.Colored"
+        </com.google.android.material.textfield.TextInputLayout>
 
-        android:id="@+id/register_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="@string/register" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:padding="32sp"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textSize="32sp"
+            app:cornerRadius="32sp" />
 
-    <Button
-        android:id="@+id/login_page_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="@string/log_in" />
+        <Button
+            android:id="@+id/login_page_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:padding="32sp"
+            android:text="@string/log_in"
+            android:textAllCaps="false"
+            android:textSize="32sp"
+            app:cornerRadius="32sp" />
 
-    <ProgressBar
-        android:id="@+id/sign_up_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="64dp"
-        android:visibility="gone" />
-</LinearLayout>
+        <ProgressBar
+            android:id="@+id/sign_up_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:visibility="gone" />
+    </LinearLayout>
 </ScrollView>

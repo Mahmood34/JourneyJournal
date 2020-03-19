@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_visited_place_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin"
+    app:behavior_hideable="true"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <TextView
+        android:id="@+id/add_visited_place_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/visited_place"
+        android:textAlignment="center"
+        android:textSize="28sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:hint="@string/visited_place_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_visited_place_edit_text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:hint="@string/visited_place_notes">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_visited_place_edit_text_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/add_visited_place_text_date_visited"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:text="@string/date_visited"
+        android:textAlignment="textStart"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/add_visited_place_button_start_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submit_visited_place_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:padding="@dimen/activity_vertical_margin"
+        android:text="Add Visited Place"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:cornerRadius="32sp"
+        app:icon="@drawable/ic_add_white_24dp" />
+
+</LinearLayout>

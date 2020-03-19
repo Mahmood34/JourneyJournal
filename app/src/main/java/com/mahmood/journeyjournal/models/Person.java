@@ -21,7 +21,7 @@ public class Person implements Parcelable {
     private UUID _id;
     private String _name;
 
-    public Person(){
+    public Person() {
 
     }
 
@@ -40,12 +40,12 @@ public class Person implements Parcelable {
         return _id.toString();
     }
 
-    public String getName() {
-        return _name;
+    public void setId(String id) {
+        _id = UUID.fromString(id);
     }
 
-    public void setId(String id){
-        _id = UUID.fromString(id);
+    public String getName() {
+        return _name;
     }
 
     public void setName(String name) {

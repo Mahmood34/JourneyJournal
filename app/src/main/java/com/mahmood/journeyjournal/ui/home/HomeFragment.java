@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,13 +29,11 @@ public class HomeFragment extends Fragment {
     private HomeViewModel _homeViewModel;
     private RecyclerView _recyclerView;
 
-    TextView tripName, startDate, endDate, notes, companions;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         _homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
-        AddTripClickListener addTripListener = (trip) -> addTripClick(trip);
+        AddTripClickListener addTripClickListener = (trip) -> addTripClick(trip);
 
         RecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
 
@@ -51,7 +48,7 @@ public class HomeFragment extends Fragment {
         FloatingActionButton button = getActivity().findViewById(R.id.floating_action_button);
         button.show();
         button.setOnClickListener(v -> {
-            final AddTripBottomSheetFragment sheetDialog = new AddTripBottomSheetFragment(addTripListener);
+            final AddTripBottomSheetFragment sheetDialog = new AddTripBottomSheetFragment(addTripClickListener);
             sheetDialog.show(getFragmentManager(), sheetDialog.getTag());
         });
         _recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

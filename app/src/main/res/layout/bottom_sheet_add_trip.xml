@@ -22,7 +22,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:hint="@string/title">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -36,7 +36,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:hint="@string/notes">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -61,16 +61,16 @@
                 android:id="@+id/add_trip_text_start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
                 android:text="@string/start_date"
                 android:textAlignment="textStart"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/add_trip_button_start_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -83,27 +83,31 @@
                 android:id="@+id/add_trip_text_end_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginVertical="@dimen/activity_vertical_margin"
                 android:text="@string/end_date"
                 android:textAlignment="textStart"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/add_trip_button_end_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
 
         </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_trip_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="@string/submit"
+        android:padding="@dimen/activity_vertical_margin"
         android:textAllCaps="false"
-        android:theme="@style/Theme.MaterialComponents.Light" />
+        android:text="Add Trip"
+        android:textSize="18sp"
+        app:cornerRadius="32sp"
+        app:icon="@drawable/ic_add_black_24dp" />
 
 </LinearLayout>

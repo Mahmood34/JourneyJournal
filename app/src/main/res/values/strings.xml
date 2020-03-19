@@ -25,4 +25,11 @@
         <item>Camera</item>
         <item>Gallery</item>
     </string-array>
+    <string name="map_activity">Maps</string>
+    <string name="visited_place">Visited Place</string>
+    <string name="visited_place_name">Name</string>
+    <string name="date_visited">Date visited</string>
+    <string name="title_activity_trip">Trip</string>
+    <string name="title_activity_visited_places">Visited Place</string>
+    <string name="visited_place_notes">Notes</string>
 </resources>
