@@ -5,8 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="@dimen/fab_margin"
+        android:alpha="0.1"
+        android:background="@drawable/ic_flight_takeoff_black_24dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="16dp"
+        android:alpha="0.1"
+        android:background="@drawable/ic_drive_eta_black_24dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintStart_toEndOf="@+id/imageView2" />
+
+    <ImageView
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="16dp"
+        android:alpha="0.1"
+        android:background="@drawable/ic_card_travel_black_24dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintStart_toEndOf="@+id/imageView4" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
+        style="@style/Widget.MaterialComponents.BottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?android:attr/windowBackground"
@@ -22,9 +57,11 @@
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/mobile_navigation" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,7 +70,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

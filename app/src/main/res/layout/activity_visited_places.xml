@@ -1,39 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/visited_place_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="300dp" />
+    <include layout="@layout/content_visited_places" />
 
-
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_visited_place_button"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
+        style="@style/Widget.Design.FloatingActionButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        android:layout_marginVertical="@dimen/activity_vertical_margin"
-        android:text="@string/add_visited_place"
-        android:textAllCaps="false"
-        app:cornerRadius="32sp"
-        app:icon="@drawable/ic_add_black_24dp" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_white_24dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/visited_place_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

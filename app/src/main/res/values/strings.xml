@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Journey Journal</string>
     <string name="title_home">Home</string>
-    <string name="title_gallery">Map</string>
-    <string name="title_map">Gallery</string>
+    <string name="title_gallery">Gallery</string>
+    <string name="title_map">Map</string>
     <string name="title_activity_trip_details">TripDetailsActivity</string>
-    <string name="login">Log in</string>
     <string name="add">Add</string>
     <string name="gallery">Gallery</string>
     <string name="new_trip">New Trip</string>
@@ -25,8 +24,13 @@
         <item>Camera</item>
         <item>Gallery</item>
     </string-array>
-    <string name="map_activity">Maps</string>
-    <string name="visited_place">Visited Place</string>
+
+    <string-array name="visited_place_choose_photo_mode_array">
+        <item>Choose from existing trip photo</item>
+        <item>Add new photo</item>
+    </string-array>
+
+    <string name="visited_place">Add Visited Place</string>
     <string name="visited_place_name">Name</string>
     <string name="date_visited">Date visited</string>
     <string name="title_activity_trip">Trip</string>
@@ -42,4 +46,36 @@
     <string name="visited_places_button">Visited places</string>
     <string name="trip_details_gallery">Gallery</string>
     <string name="trip_details_add_photo">Add Photo</string>
+    <string name="select_location">Select location</string>
+    <string name="explore">Explore</string>
+
+    <string-array name="sorting_array">
+        <item>Newest</item>
+        <item>Oldest</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="click_the_map_to_open_the_location_in_google_maps">Click the map to open the location in Google Maps</string>
+    <string name="location">Location</string>
+    <string name="share">Share</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="hotels">Hotels</string>
+    <string name="coffee">Coffee</string>
+    <string name="groceries">Groceries</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="attractions">Attractions</string>
+    <string name="view_all_visited_places">View all visited places</string>
+    <string name="new_password">New Password</string>
+    <string name="search_places">Search places</string>
+    <string name="sort_and_filter">Sort and Filter</string>
+    <string name="filter_by_location">Filter by location</string>
+    <string name="sort">Sort</string>
+    <string name="add_trip">Add Trip</string>
+    <string name="companions">Companions</string>
+    <string name="name">Name</string>
+    <string name="date">Date</string>
+
 </resources>

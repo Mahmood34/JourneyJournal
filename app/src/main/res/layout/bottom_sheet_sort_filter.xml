@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_visited_place_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin"
+    app:behavior_hideable="true"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    tools:context=".components.SortFilterBottomSheetFragment">
+
+    <TextView
+        android:id="@+id/add_trip_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sort_and_filter"
+        android:textAlignment="center"
+        android:textSize="28sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:text="@string/filter_by_location"
+        android:textAlignment="center" />
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:strokeColor="@color/quantum_grey500"
+        app:strokeWidth="1dp">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/filter_group"
+            style="@style/Widget.MaterialComponents.ChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:filterTouchesWhenObscured="true">
+
+        </com.google.android.material.chip.ChipGroup>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:text="@string/sort"
+        android:textAlignment="center" />
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="28dp"
+        app:strokeColor="@color/quantum_grey500"
+        app:strokeWidth="1dp">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner"
+            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sort_filter_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/sort_and_filter"
+        android:textAllCaps="false"
+        app:cornerRadius="28dp"
+        app:icon="@drawable/ic_filter_list_black_24dp"
+        app:iconGravity="textStart" />
+
+</LinearLayout>

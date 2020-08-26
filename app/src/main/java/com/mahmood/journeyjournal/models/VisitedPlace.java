@@ -24,19 +24,24 @@ public class VisitedPlace implements Parcelable {
     private String _name;
     private Date _dateVisited;
     private String _location;
+    private Double _lat;
+    private Double _lng;
     private String _travellersNotes;
-    private ArrayList<TripPhoto> _tripPhotos = new ArrayList<>();
+    private String _tripId;
+    private ArrayList<String> _tripPhotoIds = new ArrayList<>();
 
     public VisitedPlace() {
     }
 
-    public VisitedPlace(String name, Date dateVisited, String location, String travellersNotes, ArrayList<TripPhoto> tripPhotos) {
+    public VisitedPlace(String name, Date dateVisited, String location, Double lat, Double lng, String travellersNotes, String tripId) {
         _id = UUID.randomUUID();
         _name = name;
         _dateVisited = dateVisited;
         _location = location;
+        _lat = lat;
+        _lng = lng;
         _travellersNotes = travellersNotes;
-        _tripPhotos = tripPhotos;
+        _tripId = tripId;
     }
 
     //region parcel
@@ -45,8 +50,11 @@ public class VisitedPlace implements Parcelable {
         _name = in.readString();
         _dateVisited = (Date) in.readValue(Date.class.getClassLoader());
         _location = in.readString();
+        _lat = in.readDouble();
+        _lng = in.readDouble();
         _travellersNotes = in.readString();
-        _tripPhotos = in.createTypedArrayList(TripPhoto.CREATOR);
+        _tripId = in.readString();
+        _tripPhotoIds = in.readArrayList(String.class.getClassLoader());
     }
 
     @Override
@@ -60,8 +68,11 @@ public class VisitedPlace implements Parcelable {
         dest.writeString(_name);
         dest.writeValue(_dateVisited);
         dest.writeString(_location);
+        dest.writeDouble(_lat);
+        dest.writeDouble(_lng);
         dest.writeString(_travellersNotes);
-        dest.writeTypedList(_tripPhotos);
+        dest.writeString(_tripId);
+        dest.writeList(_tripPhotoIds);
     }
     //endregion
 
@@ -90,12 +101,20 @@ public class VisitedPlace implements Parcelable {
         this._dateVisited = new Date(dateVisited);
     }
 
-    public String getLocation() {
-        return _location;
+    public Double getLat() {
+        return _lat;
     }
 
-    public void setLocation(String location) {
-        this._location = location;
+    public void setLat(Double _lat) {
+        this._lat = _lat;
+    }
+
+    public Double getLng() {
+        return _lng;
+    }
+
+    public void setLng(Double _lng) {
+        this._lng = _lng;
     }
 
     public String getTravellersNotes() {
@@ -106,39 +125,52 @@ public class VisitedPlace implements Parcelable {
         this._travellersNotes = travellersNotes;
     }
 
-    public TripPhoto getTripPhoto(int position) {
-        return _tripPhotos.get(position);
+    public String getTripId() {
+        return _tripId;
     }
 
-    public ArrayList<TripPhoto> getTripPhotos() {
-        return _tripPhotos;
+    public void setTripId(String tripId) {
+        _tripId = tripId;
     }
 
-    public void setTripPhotos(ArrayList<TripPhoto> photos) {
-        _tripPhotos = photos;
+    public String getTripPhotoId(int position) {
+        return _tripPhotoIds.get(position);
     }
 
+    public ArrayList<String> getTripPhotoIds() {
+        return _tripPhotoIds;
+    }
+
+    public void setTripPhotoIds(ArrayList<String> photoIds) {
+        _tripPhotoIds = photoIds;
+    }
     //endregion
 
-    public void addTripPhoto(TripPhoto tripPhoto) {
-        _tripPhotos.add(tripPhoto);
+    public void addTripPhotoId(String tripPhotoId) {
+        _tripPhotoIds.add(tripPhotoId);
     }
 
-    public void addTripPhotos(ArrayList<TripPhoto> tripPhotos) {
-        _tripPhotos.addAll(tripPhotos);
+    public void addTripPhotoIds(ArrayList<String> tripPhotos) {
+        _tripPhotoIds.addAll(tripPhotos);
     }
 
-    public void removeTripPhoto(TripPhoto tripPhoto) {
-        _tripPhotos.remove(tripPhoto);
+    public void removeTripPhotoId(String tripPhotoId) {
+        _tripPhotoIds.remove(tripPhotoId);
     }
 
-    public void removeTripPhotos(ArrayList<TripPhoto> tripPhotos) {
-        _tripPhotos.removeAll(tripPhotos);
+    public void removeTripPhotoIds(ArrayList<TripPhoto> tripPhotos) {
+        _tripPhotoIds.removeAll(tripPhotos);
     }
 
-    public void removeAllTripPhotos() {
-        _tripPhotos = new ArrayList<>();
+    public void removeAllTripPhotoIds() {
+        _tripPhotoIds = new ArrayList<>();
     }
 
+    public String getLocation() {
+        return _location;
+    }
 
+    public void setLocation(String location) {
+        this._location = location;
+    }
 }

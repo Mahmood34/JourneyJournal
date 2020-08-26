@@ -22,9 +22,7 @@ public class GalleryViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
-        if (_listener != null) {
-            _listener.onItemClick(v, getAdapterPosition());
-        }
+        _listener.onItemClick(v, getAdapterPosition());
     }
 
     public ImageView getImage() {

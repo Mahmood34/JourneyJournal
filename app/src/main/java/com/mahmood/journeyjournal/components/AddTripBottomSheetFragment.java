@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.mahmood.journeyjournal.DatabaseConstant;
 import com.mahmood.journeyjournal.R;
 import com.mahmood.journeyjournal.interfaces.AddTripClickListener;
@@ -25,6 +23,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implements View.OnClickListener {
 
@@ -37,8 +36,6 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
     private Button _confirmButton;
 
     private Trip _trip;
-
-    private DatabaseReference _tripRef;
 
     public AddTripBottomSheetFragment(AddTripClickListener listener) {
         _listener = listener;
@@ -53,6 +50,7 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.bottom_sheet_add_trip, container, false);
+
     }
 
     @Override
@@ -70,7 +68,7 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
         _startDateButton.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext());
             try {
-                datePickerDialog.getDatePicker().setMaxDate(_formatter.parse(_endDateButton.getText().toString()).getTime());
+                datePickerDialog.getDatePicker().setMaxDate(Objects.requireNonNull(_formatter.parse(_endDateButton.getText().toString())).getTime());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -84,7 +82,7 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
         _endDateButton.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(v.getContext());
             try {
-                datePickerDialog.getDatePicker().setMinDate(_formatter.parse(_startDateButton.getText().toString()).getTime());
+                datePickerDialog.getDatePicker().setMinDate(Objects.requireNonNull(_formatter.parse(_startDateButton.getText().toString())).getTime());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -96,7 +94,6 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
             datePickerDialog.show();
         });
 
-        _tripRef = FirebaseDatabase.getInstance().getReference().child(DatabaseConstant.TRIP_REPOSITORY);
     }
 
     @Override
@@ -104,13 +101,17 @@ public class AddTripBottomSheetFragment extends BottomSheetDialogFragment implem
         try {
             Date startDate = _formatter.parse(_startDateButton.getText().toString());
             Date endDate = _formatter.parse(_endDateButton.getText().toString());
+            if (_titleEditText.getText().toString().trim().equals("")) {
+                _titleEditText.setText(_formatter.format(Objects.requireNonNull(startDate)));
+            }
             _trip = new Trip(_titleEditText.getText().toString(), startDate, endDate, _notesEditText.getText().toString());
             _listener.onClick(_trip);
-            _tripRef.child(_trip.getId()).setValue(_trip);
-            Toast.makeText(v.getContext(), "Success", Toast.LENGTH_SHORT).show();
+
+            DatabaseConstant.getInstance().addTrip(_trip);
+            Toast.makeText(v.getContext(), "New trip added", Toast.LENGTH_SHORT).show();
             dismiss();
         } catch (ParseException e) {
-            Toast.makeText(v.getContext(), "Invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), "Error", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -1,15 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.TripDetailsActivity">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/content_trip_details" />
-    </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:hint="@string/trip_details_title">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/trip_details_edit_text_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="36sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:baselineAligned="false"
+                android:textAlignment="center"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/trip_details_text_start_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trip_details_start_date"
+                        android:textAlignment="center" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/trip_details_button_start_date"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/trip_details_text_end_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/trip_detail_end_date"
+                        android:textAlignment="center" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/trip_details_button_end_date"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:hint="@string/trip_details_notes">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/trip_details_edit_text_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/trip_details_button_companions"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/trip_details_companions"
+                    android:textAllCaps="false" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/trip_details_add_companion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_weight="2"
+                    android:text="@string/trip_details_add_companion"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    app:cornerRadius="28dp"
+                    app:icon="@drawable/ic_person_black_24dp"
+                    app:iconGravity="textStart" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/visited_places_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:text="@string/visited_places_button"
+                android:textAllCaps="false"
+                app:cornerRadius="28dp"
+                app:icon="@drawable/ic_location_on_black_24dp"
+                app:iconGravity="textStart" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/activity_horizontal_margin">
+
+                <include layout="@layout/content_gallery" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

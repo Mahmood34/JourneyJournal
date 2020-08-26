@@ -22,34 +22,38 @@ import com.mahmood.journeyjournal.interfaces.AddTripClickListener;
 import com.mahmood.journeyjournal.interfaces.RecyclerViewClickListener;
 import com.mahmood.journeyjournal.models.Trip;
 
+import java.util.Objects;
+
 import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel _homeViewModel;
     private RecyclerView _recyclerView;
+    private FloatingActionButton button;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         _homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
-        AddTripClickListener addTripClickListener = (trip) -> addTripClick(trip);
+        AddTripClickListener addTripClickListener = this::addTripClick;
 
-        RecyclerViewClickListener recyclerViewListener = (view, position) -> recyclerViewClick(view, position);
+        RecyclerViewClickListener recyclerViewListener = this::recyclerViewClick;
 
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         _recyclerView = root.findViewById(R.id.recycler_view_home);
 
-        _homeViewModel.getTrips().observe(this, trips -> {
+        _homeViewModel.getTrips().observe(getViewLifecycleOwner(), trips -> {
             TripAdapter tripAdapter = new TripAdapter(trips, recyclerViewListener);
             _recyclerView.setAdapter(tripAdapter);
         });
 
-        FloatingActionButton button = getActivity().findViewById(R.id.floating_action_button);
+        button = requireActivity().findViewById(R.id.floating_action_button);
+        button.setImageResource(R.drawable.ic_add_white_24dp);
         button.show();
         button.setOnClickListener(v -> {
             final AddTripBottomSheetFragment sheetDialog = new AddTripBottomSheetFragment(addTripClickListener);
-            sheetDialog.show(getFragmentManager(), sheetDialog.getTag());
+            sheetDialog.show(requireFragmentManager(), sheetDialog.getTag());
         });
         _recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
@@ -71,19 +75,21 @@ public class HomeFragment extends Fragment {
         try {
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == 1 && resultCode == RESULT_OK) {
-                Trip updatedTrip = data.getExtras().getParcelable("updatedTrip");
-                Trip trip = _homeViewModel.getTrip(updatedTrip.getId());
+                Trip updatedTrip = Objects.requireNonNull(data.getExtras()).getParcelable("updatedTrip");
+                Trip trip = _homeViewModel.getTrip(Objects.requireNonNull(updatedTrip).getId());
                 trip.setTitle(updatedTrip.getTitle());
                 trip.setNotes(updatedTrip.getNotes());
                 trip.setStartDate(updatedTrip.getStartDate());
                 trip.setEndDate(updatedTrip.getEndDate());
                 trip.setCompanions(updatedTrip.getCompanions());
-                trip.setTripPhotos(updatedTrip.getTripPhotos());
-                _recyclerView.getAdapter().notifyDataSetChanged();
+                trip.setTripPhotoIds(updatedTrip.getTripPhotoIds());
+                trip.setVisitedPlaceIds(updatedTrip.getVisitedPlaceIds());
+                Objects.requireNonNull(_recyclerView.getAdapter()).notifyDataSetChanged();
 
             }
         } catch (Exception exception) {
             Toast.makeText(this.getActivity(), exception.toString(), Toast.LENGTH_SHORT).show();
         }
+
     }
 }

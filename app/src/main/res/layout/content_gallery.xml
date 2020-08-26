@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/trip_details_gallery"
+        android:textAlignment="center"
+        android:textSize="28sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+        android:text="@string/trip_details_add_photo"
+        android:textAllCaps="false"
+        app:cornerRadius="28dp"
+        app:icon="@drawable/ic_photo_black_24dp"
+        app:iconGravity="textStart" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="88dp" />
+
+</LinearLayout>

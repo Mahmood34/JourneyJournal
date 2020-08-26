@@ -25,33 +25,31 @@ public class Trip implements Parcelable {
     private String _title;
     private Date _startDate;
     private Date _endDate;
-    private ArrayList<TripPhoto> _tripPhotos = new ArrayList<>();
+    private ArrayList<String> _tripPhotoIds = new ArrayList<>();
     private String _notes;
     private ArrayList<Person> _companions = new ArrayList<>();
+    private ArrayList<String> _visitedPlaceIds = new ArrayList<>();
 
-
-    private ArrayList<VisitedPlace> _visitedPlaces = new ArrayList<>();
-
-    public Trip(){
+    public Trip() {
 
     }
 
-    public Trip(String title, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes, ArrayList<Person> companions) {
+    public Trip(String title, Date startDate, Date endDate, ArrayList<String> tripPhotos, String notes, ArrayList<Person> companions) {
         _id = UUID.randomUUID();
         _title = title;
         _startDate = startDate;
         _endDate = endDate;
-        _tripPhotos = tripPhotos;
+        _tripPhotoIds = tripPhotos;
         _notes = notes;
         _companions = companions;
     }
 
-    public Trip(String title, Date startDate, Date endDate, ArrayList<TripPhoto> tripPhotos, String notes) {
+    public Trip(String title, Date startDate, Date endDate, ArrayList<String> tripPhotos, String notes) {
         _id = UUID.randomUUID();
         _title = title;
         _startDate = startDate;
         _endDate = endDate;
-        _tripPhotos = tripPhotos;
+        _tripPhotoIds = tripPhotos;
         _notes = notes;
     }
 
@@ -77,17 +75,17 @@ public class Trip implements Parcelable {
         _title = in.readString();
         _startDate = (Date) in.readValue(Date.class.getClassLoader());
         _endDate = (Date) in.readValue(Date.class.getClassLoader());
-        _tripPhotos = in.readArrayList(TripPhoto.class.getClassLoader());
+        _tripPhotoIds = in.readArrayList(TripPhoto.class.getClassLoader());
         _notes = in.readString();
         _companions = in.readArrayList(Person.class.getClassLoader());
-        _visitedPlaces = in.readArrayList(VisitedPlace.class.getClassLoader());
+        _visitedPlaceIds = in.readArrayList(VisitedPlace.class.getClassLoader());
     }
 
     public String getId() {
         return _id.toString();
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this._id = UUID.fromString(id);
     }
 
@@ -155,44 +153,52 @@ public class Trip implements Parcelable {
         _companions = new ArrayList<>();
     }
 
-    public TripPhoto getTripPhoto(int position) {
-        return _tripPhotos.get(position);
+    public String getTripPhotoId(int position) {
+        return _tripPhotoIds.get(position);
     }
 
-    public ArrayList<TripPhoto> getTripPhotos() {
-        return _tripPhotos;
+    public ArrayList<String> getTripPhotoIds() {
+        return _tripPhotoIds;
     }
 
-    public void setTripPhotos(ArrayList<TripPhoto> photos) {
-        _tripPhotos = photos;
+    public void setTripPhotoIds(ArrayList<String> photoIds) {
+        _tripPhotoIds = photoIds;
     }
 
-    public void addTripPhoto(TripPhoto tripPhoto) {
-        _tripPhotos.add(tripPhoto);
+    public void addTripPhotoId(String tripPhotoId) {
+        _tripPhotoIds.add(tripPhotoId);
     }
 
-    public void addTripPhotos(ArrayList<TripPhoto> tripPhotos) {
-        _tripPhotos.addAll(tripPhotos);
+    public void addTripPhotos(ArrayList<String> tripPhotoIds) {
+        _tripPhotoIds.addAll(tripPhotoIds);
     }
 
-    public void removeTripPhoto(TripPhoto tripPhoto) {
-        _tripPhotos.remove(tripPhoto);
+    public void removeTripPhotoId(String tripPhotoId) {
+        _tripPhotoIds.remove(tripPhotoId);
     }
 
-    public void removeTripPhotos(ArrayList<TripPhoto> tripPhotos) {
-        _tripPhotos.removeAll(tripPhotos);
+    public void removeTripPhotoIds(ArrayList<String> tripPhotoIds) {
+        _tripPhotoIds.removeAll(tripPhotoIds);
     }
 
-    public void removeAllTripPhotos() {
-        _tripPhotos = new ArrayList<>();
+    public void removeAllTripPhotoIds() {
+        _tripPhotoIds = new ArrayList<>();
     }
 
-    public ArrayList<VisitedPlace> getVisitedPlaces() {
-        return _visitedPlaces;
+    public String getVisitedPlaceId(int position) {
+        return _visitedPlaceIds.get(position);
     }
 
-    public void setVisitedPlaces(ArrayList<VisitedPlace> _visitedPlaces) {
-        this._visitedPlaces = _visitedPlaces;
+    public ArrayList<String> getVisitedPlaceIds() {
+        return _visitedPlaceIds;
+    }
+
+    public void setVisitedPlaceIds(ArrayList<String> _visitedPlaces) {
+        this._visitedPlaceIds = _visitedPlaces;
+    }
+
+    public void addVisitedPlaceId(String visitedPlaceId) {
+        _visitedPlaceIds.add(visitedPlaceId);
     }
 
     @Override
@@ -206,13 +212,13 @@ public class Trip implements Parcelable {
         dest.writeString(_title);
         dest.writeValue(_startDate);
         dest.writeValue(_endDate);
-        dest.writeList(_tripPhotos);
+        dest.writeList(_tripPhotoIds);
         dest.writeString(_notes);
         dest.writeList(_companions);
-        dest.writeList(_visitedPlaces);
+        dest.writeList(_visitedPlaceIds);
     }
 
-    public void addVisitedPlace(VisitedPlace visitedPlace) {
-        _visitedPlaces.add(visitedPlace);
+    public void removeVisitedPlaceId(String id) {
+        _visitedPlaceIds.remove(id);
     }
 }

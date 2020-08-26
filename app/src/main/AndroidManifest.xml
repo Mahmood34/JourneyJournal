@@ -3,9 +3,14 @@
     package="com.mahmood.journeyjournal">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.Camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -14,10 +19,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.VisitedPlaceDetails" />
         <activity
-            android:name=".activities.TripVisitedPlaceActivity"
+            android:name=".activities.VisitedPlacesActivity"
             android:label="@string/title_activity_visited_places"
-            android:parentActivityName=".activities.TripDetailsActivity">
+            android:parentActivityName=".activities.TripDetailsActivity"
+            android:screenOrientation="locked">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mahmood.journeyjournal.activities.TripDetailsActivity" />
@@ -42,6 +49,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -51,10 +59,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAmxJYtW1YcjX3hWTJFHaMMYopP112xXk4" />
+            android:value="AIzaSyCTHlPH8wyDuX7oe9mZ0OirwmvqBzgFaR0" />
     </application>
-
-    <uses-feature android:name="android.hardware.Camera"
-        android:required="true"/>
 
 </manifest>

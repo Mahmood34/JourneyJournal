@@ -12,8 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.mahmood.journeyjournal.ui.gallery.GalleryFragment"
+        android:id="@+id/navigation_explore"
+        android:name="com.mahmood.journeyjournal.ui.explore.ExploreFragment"
         android:label="@string/title_map"
+        tools:layout="@layout/fragment_explore" />
+
+    <fragment
+        android:id="@+id/navigation_gallery"
+        android:name="com.mahmood.journeyjournal.ui.gallery.GalleryFragment"
+        android:label="@string/title_gallery"
         tools:layout="@layout/fragment_gallery" />
 </navigation>

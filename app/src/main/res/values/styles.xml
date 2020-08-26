@@ -1,21 +1,42 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/ic_launcher_background</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Filter</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+        <item name="editTextStyle">@style/App_textInputStyle</item>
+        <!--        <item name="editTextStyle">@style/App_editTextStyle</item>-->
+
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="App_textInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">24dp</item>
+        <item name="boxCornerRadiusTopEnd">24dp</item>
+        <item name="boxCornerRadiusBottomStart">24dp</item>
+        <item name="boxCornerRadiusBottomEnd">24dp</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!--    <style name="App_editTextStyle" parent="Widget.AppCompat.EditText">-->
+    <!--        <item name="boxCornerRadiusTopStart">28dp</item>-->
+    <!--        <item name="boxCornerRadiusTopEnd">28dp</item>-->
+    <!--        <item name="boxCornerRadiusBottomStart">28dp</item>-->
+    <!--        <item name="boxCornerRadiusBottomEnd">28dp</item>-->
+    <!--    </style>-->
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
 
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/shape</item>
+    </style>
 
 </resources>

@@ -17,7 +17,6 @@ import com.mahmood.journeyjournal.models.VisitedPlace;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class VisitedPlaceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private DateFormat _formatter = SimpleDateFormat.getDateInstance();
@@ -45,11 +44,9 @@ public class VisitedPlaceAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof VisitedPlaceHolder) {
             VisitedPlaceHolder visitedPlaceHolder = (VisitedPlaceHolder) holder;
             TextView titleTextView = visitedPlaceHolder.get_nameTextView();
-            TextView startDateTextView = visitedPlaceHolder.get_dateTextView();
-            TextView notesTextView = visitedPlaceHolder.get_notesTextView();
+            TextView startDateTextView = visitedPlaceHolder.getDateTextView();
             titleTextView.setText(visitedPlace.getName());
-            startDateTextView.setText(_formatter.format(new Date(visitedPlace.getDateVisited())));
-            notesTextView.setText(visitedPlace.getTravellersNotes());
+            startDateTextView.setText(_formatter.format(visitedPlace.getDateVisited()));
         }
     }
 

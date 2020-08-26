@@ -20,7 +20,6 @@ public class VisitedPlaceHolder extends RecyclerView.ViewHolder implements View.
         super(itemView);
         _nameTextView = itemView.findViewById(R.id.visited_place_name);
         _dateTextView = itemView.findViewById(R.id.visited_place_date);
-        _notesTextView = itemView.findViewById(R.id.visited_place_notes);
         _listener = listener;
         itemView.setOnClickListener(this);
     }
@@ -34,23 +33,16 @@ public class VisitedPlaceHolder extends RecyclerView.ViewHolder implements View.
         return _nameTextView;
     }
 
-    public void set_nameTextView(TextView _nameTextView) {
+    public void setNameTextView(TextView _nameTextView) {
         this._nameTextView = _nameTextView;
     }
 
-    public TextView get_dateTextView() {
+    public TextView getDateTextView() {
         return _dateTextView;
     }
 
-    public void set_dateTextView(TextView _dateTextView) {
+    public void setDateTextView(TextView _dateTextView) {
         this._dateTextView = _dateTextView;
     }
 
-    public TextView get_notesTextView() {
-        return _notesTextView;
-    }
-
-    public void set_notesTextView(TextView _notesTextView) {
-        this._notesTextView = _notesTextView;
-    }
 }
